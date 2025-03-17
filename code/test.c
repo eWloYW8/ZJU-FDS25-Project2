@@ -18,6 +18,9 @@ int main() {
         Node *derivative = differentiate(node, variables[i]);
         derivative = simple_simplify(derivative);
         printf("%s\n", node_to_string(derivative));
+        Node *derivative_rebuilt = rebuild_ast(derivative);
+        printf("%s\n", node_to_string(derivative_rebuilt));
+        free_node(derivative_rebuilt);
         free_node(derivative);
         free(variables[i]); 
     }

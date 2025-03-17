@@ -320,3 +320,17 @@ int is_equal(Node *node1, Node *node2) {
         return 1;
     }
 }
+
+// monomial_simplify simplifies a monomial node.
+// A monomial node is a node that is a product of constants and variables.
+// It will record all nodes in the monomial node and the exponents of the equal node.
+// It will return a new monomial node that is simplified.
+// For example, if the input node is 2*x^2*3/x^3, the output node will be 6/x; if the input node is 2*x^2*3*x^3, the output node will be 6*x^5.
+// And it will extract pow(node,[constant]), for example, pow(sin(x),2) will be extracted as sin(x)^2.
+Node* monomial_simplify(Node *node) {
+    if (node == NULL) return NULL;
+    if (node->type != FUNCTION_MULTIPLY && node->type == FUNCTION_DIVIDE) return node;
+
+    return node;
+    // To be finished
+}
