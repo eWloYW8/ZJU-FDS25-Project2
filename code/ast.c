@@ -239,6 +239,8 @@ char* node_to_string(Node *node, int parent_priority){
                 case FUNCTION_EXP:
                     sprintf(str, "exp(%s)", left);
                     break;
+                default:
+                    sprintf(str, "ERROR");
             }
         } else {
             switch (node->type) {
@@ -279,6 +281,8 @@ char* node_to_string(Node *node, int parent_priority){
                 case FUNCTION_EXP:
                     sprintf(str, "exp(%s)", left);
                     break;
+                default:
+                    sprintf(str, "ERROR");
             }
         }
         free(left);
