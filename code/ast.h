@@ -10,7 +10,6 @@ enum NodeType {
     FUNCTION_MULTIPLY, // * (binary)
     FUNCTION_DIVIDE, // / (binary)
     FUNCTION_POWER, // ^ (binary)
-    FUNCTION_NEGATIVE, // - (unary)
     FUNCTION_SIN, // sin (unary)
     FUNCTION_COS, // cos (unary)
     FUNCTION_TAN, // tan (unary)

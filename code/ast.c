@@ -15,7 +15,6 @@ int PRIORITY[] = {
     2, // FUNCTION_MULTIPLY
     2, // FUNCTION_DIVIDE
     3, // FUNCTION_POWER
-    1, // FUNCTION_NEGATIVE
     4, // FUNCTION_SIN
     4, // FUNCTION_COS
     4, // FUNCTION_TAN
@@ -35,7 +34,6 @@ int ASSOCIATIVITY[] = {
     0, // FUNCTION_MULTIPLY
     0, // FUNCTION_DIVIDE
     1, // FUNCTION_POWER
-    0, // FUNCTION_NEGATIVE
     0, // FUNCTION_SIN
     0, // FUNCTION_COS
     0, // FUNCTION_TAN
@@ -206,7 +204,11 @@ char* node_to_string(Node *node){
                 sprintf(str, "(%s+%s)", left, right);
                 break;
             case FUNCTION_SUBTRACT:
-                sprintf(str, "(%s-%s)", left, right);
+                if (left == NULL) {
+                    sprintf(str, "(-%s)", right); // This happens because -(Node) is considered as NULL-(Node)
+                } else {
+                    sprintf(str, "(%s-%s)", left, right);
+                }
                 break;
             case FUNCTION_MULTIPLY:
                 sprintf(str, "(%s*%s)", left, right);
@@ -216,9 +218,6 @@ char* node_to_string(Node *node){
                 break;
             case FUNCTION_POWER:
                 sprintf(str, "(%s^%s)", left, right);
-                break;
-            case FUNCTION_NEGATIVE:
-                sprintf(str, "-%s", left);
                 break;
             case FUNCTION_SIN:
                 sprintf(str, "sin(%s)", left);
