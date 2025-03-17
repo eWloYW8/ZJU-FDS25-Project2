@@ -4,6 +4,7 @@
 #include <string.h>
 
 Node* differentiate(Node *node, const char *variable) {
+    Node *temp;
     if (node == NULL) return NULL;
     Node *result = (Node*)malloc(sizeof(Node));
     if (node->type == NODE_CONSTANT) {
@@ -109,7 +110,7 @@ Node* differentiate(Node *node, const char *variable) {
                 result->data.function.right = deep_copy_node(node->data.function.left);
                 break;
             case FUNCTION_LOG:
-                Node *temp = create_node(FUNCTION_DIVIDE, NULL, 0, 0);
+                temp = create_node(FUNCTION_DIVIDE, NULL, 0, 0);
                 temp->data.function.left = create_node(FUNCTION_LN, NULL, 0, 0);
                 temp->data.function.right = create_node(FUNCTION_LN, NULL, 0, 0);
                 temp->data.function.left->data.function.left = deep_copy_node(node->data.function.right);
