@@ -7,6 +7,7 @@
 Node* differentiate(Node *node, const char *variable);
 
 // simplify simplifies a node.
+// This function only performs one-layer simplification.
 // It will return the input node instead of creating a new node, but you shouldn't use the input node anymore beacaue it may be freed.
 // It simplifies the node in the following rule:
 // 1. 1*node = node*1 = node
@@ -19,6 +20,7 @@ Node* differentiate(Node *node, const char *variable);
 // 8. pow(node, 1) = node
 // 9. 0/node = 0
 // 10. node/1 = node
+// 11. 0-node = -node
 Node* simple_simplify(Node *node);
 
 // find_variables finds all variables in a node.

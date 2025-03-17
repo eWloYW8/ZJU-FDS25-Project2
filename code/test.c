@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 int main() {
-    char expression[] = "a*10*b+2^a/a";
+    char expression[] = "log(a,b)";
     remove_blankspace(expression);
     int current_position = 0;
     Node *node = build_ast(expression, &current_position);

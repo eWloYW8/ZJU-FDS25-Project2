@@ -165,6 +165,11 @@ Node* simple_simplify(Node *node) {
                 free(node);
                 return temp;
             }
+            else if (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0) {
+                free(node->data.function.left);
+                node->data.function.left = NULL;
+                return node;
+            }
             else {
                 return node;
             }
