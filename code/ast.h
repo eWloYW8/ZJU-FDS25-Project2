@@ -1,10 +1,6 @@
 // AST (Abstract Syntax Tree) is a tree representation of a mathematical expression.
 #pragma once
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
 // NodeType is the type of a node in the AST.
 enum NodeType {
     NODE_CONSTANT, // 1, 2, 3, 4, 5, 6, 7, 8, 9, 0

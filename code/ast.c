@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <ctype.h>
 
 // PRIORITY is the priority of each operator.
 int PRIORITY[] = {
