@@ -32,7 +32,7 @@ extern int PRIORITY[];
 typedef struct Node {
     enum NodeType type;
     union {
-        double constant;
+        long long constant;
         char variable[VARIABLE_NAME_SIZE];
         struct {
             struct Node *left;

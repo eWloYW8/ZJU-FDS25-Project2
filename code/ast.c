@@ -47,7 +47,7 @@ Node* create_node(enum NodeType type, const char data[], int start, int end) {
     Node *node = (Node*)malloc(sizeof(Node));
     node->type = type;
     if (type == NODE_CONSTANT) {
-        node->data.constant = atof(data + start);
+        node->data.constant = atoi(data + start);
     } else if (type == NODE_VARIABLE) {
         strncpy(node->data.variable, data + start, end - start);
         node->data.variable[end - start] = '\0';
@@ -88,7 +88,7 @@ Node* build_ast(const char *expression, int *current_position) {
     while (expression[*current_position] != '\0') {
         if (isdigit(expression[*current_position])) {
             int start = *current_position;
-            while (isdigit(expression[*current_position]) || expression[*current_position] == '.') {
+            while (isdigit(expression[*current_position])) {
                 (*current_position)++;
             }
             Node *node = create_node(NODE_CONSTANT, expression, start, *current_position);
@@ -141,7 +141,7 @@ Node* build_ast(const char *expression, int *current_position) {
             (*current_position)++;
             Node *node = build_ast(expression, current_position);
             push(operands, node);
-        } else if (expression[*current_position] == ')') {
+        } else if (expression[*current_position] == ')' || expression[*current_position] == ',') {
             (*current_position)++;
             break;
         } else {
@@ -194,7 +194,7 @@ char* node_to_string(Node *node){
     if (node == NULL) return NULL;
     char *str = (char*)malloc(100);
     if (node->type == NODE_CONSTANT) {
-        sprintf(str, "%lf", node->data.constant);
+        sprintf(str, "%lld", node->data.constant);
     } else if (node->type == NODE_VARIABLE) {
         sprintf(str, "%s", node->data.variable);
     } else {
