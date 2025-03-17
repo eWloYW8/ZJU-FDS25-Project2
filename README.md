@@ -12,6 +12,10 @@ You can build this project with CMake.
 
 To be finished...
 
+# Note
+
+I was once impressed by the magical functial of CAS (such as Mathematica, giac and sympy), this project gives me a chance to gain a deeper understanding of the underlying algorithms.
+
 # Problem
 
 ## Hard Autograd for Algebraic Expressions
