@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 int main() {
-    char expression[] = "log(a,b)";
+    char expression[] = "x*ln(x*y)+y*cos(x)+y*sin(2*x)";
     remove_blankspace(expression);
     int current_position = 0;
     Node *node = build_ast(expression, &current_position);

@@ -197,14 +197,18 @@ char* _node_to_string(Node *node, int parent_priority){
         sprintf(str, "%s", node->data.variable);
     } else {
         int current_priority = PRIORITY[node->type];
-        char *left = _node_to_string(node->data.function.left, current_priority);
-        char *right = _node_to_string(node->data.function.right, current_priority);
+        char *left = NULL;
+        char *right = NULL;
         if (current_priority >= parent_priority) {
             switch (node->type) {
                 case FUNCTION_ADD:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     sprintf(str, "%s+%s", left, right);
                     break;
                 case FUNCTION_SUBTRACT:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     if (left == NULL) {
                         sprintf(str, "-%s", right); // This happens because -(Node) is considered as NULL-(Node)
                     } else {
@@ -212,30 +216,43 @@ char* _node_to_string(Node *node, int parent_priority){
                     }
                     break;
                 case FUNCTION_MULTIPLY:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     sprintf(str, "%s*%s", left, right);
                     break;
                 case FUNCTION_DIVIDE:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     sprintf(str, "%s/%s", left, right);
                     break;
                 case FUNCTION_POWER:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     sprintf(str, "%s^%s", left, right);
                     break;
                 case FUNCTION_SIN:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "sin(%s)", left);
                     break;
                 case FUNCTION_COS:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "cos(%s)", left);
                     break;
                 case FUNCTION_TAN:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "tan(%s)", left);
                     break;
                 case FUNCTION_LN:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "ln(%s)", left);
                     break;
                 case FUNCTION_LOG:
+                    left = _node_to_string(node->data.function.left, -1);
+                    right = _node_to_string(node->data.function.right, -1);
                     sprintf(str, "log(%s,%s)", left, right);
                     break;
                 case FUNCTION_EXP:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "exp(%s)", left);
                     break;
                 default:
@@ -244,9 +261,13 @@ char* _node_to_string(Node *node, int parent_priority){
         } else {
             switch (node->type) {
                 case FUNCTION_ADD:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     sprintf(str, "(%s+%s)", left, right);
                     break;
                 case FUNCTION_SUBTRACT:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     if (left == NULL) {
                         sprintf(str, "(-%s)", right); // This happens because -(Node) is considered as NULL-(Node)
                     } else {
@@ -254,30 +275,43 @@ char* _node_to_string(Node *node, int parent_priority){
                     }
                     break;
                 case FUNCTION_MULTIPLY:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     sprintf(str, "(%s*%s)", left, right);
                     break;
                 case FUNCTION_DIVIDE:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     sprintf(str, "(%s/%s)", left, right);
                     break;
                 case FUNCTION_POWER:
+                    left = _node_to_string(node->data.function.left, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority);
                     sprintf(str, "(%s^%s)", left, right);
                     break;
                 case FUNCTION_SIN:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "sin(%s)", left);
                     break;
                 case FUNCTION_COS:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "cos(%s)", left);
                     break;
                 case FUNCTION_TAN:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "tan(%s)", left);
                     break;
                 case FUNCTION_LN:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "ln(%s)", left);
                     break;
                 case FUNCTION_LOG:
+                    left = _node_to_string(node->data.function.left, -1);
+                    right = _node_to_string(node->data.function.right, -1);
                     sprintf(str, "log(%s,%s)", left, right);
                     break;
                 case FUNCTION_EXP:
+                    left = _node_to_string(node->data.function.left, -1);
                     sprintf(str, "exp(%s)", left);
                     break;
                 default:

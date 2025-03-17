@@ -143,13 +143,13 @@ Node* simple_simplify(Node *node) {
     }
     switch (node->type) {
         case FUNCTION_ADD:
-            if (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0) {
+            if ((node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0) || node->data.function.left == NULL) {
                 Node *temp = node->data.function.right;
                 free(node->data.function.left);
                 free(node);
                 return temp;
             }
-            else if (node->data.function.right->type == NODE_CONSTANT && node->data.function.right->data.constant == 0) {
+            else if (node->data.function.right == NULL || (node->data.function.right->type == NODE_CONSTANT && node->data.function.right->data.constant == 0)) {
                 Node *temp = node->data.function.left;
                 free(node->data.function.right);
                 free(node);
@@ -162,11 +162,12 @@ Node* simple_simplify(Node *node) {
         case FUNCTION_SUBTRACT:
             if (node->data.function.right->type == NODE_CONSTANT && node->data.function.right->data.constant == 0) {
                 Node *temp = node->data.function.left;
+                if (temp == NULL) temp = create_node(NODE_CONSTANT, "0", 0, 1);
                 free(node->data.function.right);
                 free(node);
                 return temp;
             }
-            else if (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0) {
+            else if (node->data.function.left != NULL && node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0) {
                 free(node->data.function.left);
                 node->data.function.left = NULL;
                 return node;
@@ -176,7 +177,7 @@ Node* simple_simplify(Node *node) {
             }
             break;
         case FUNCTION_MULTIPLY:
-            if ((node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0) || (node->data.function.right->type == NODE_CONSTANT && node->data.function.right->data.constant == 0)) {
+            if (node->data.function.left == NULL || node->data.function.right == NULL || (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0) || (node->data.function.right->type == NODE_CONSTANT && node->data.function.right->data.constant == 0)) {
                 free_node(node);
                 return create_node(NODE_CONSTANT, "0", 0, 1);
             }
@@ -197,7 +198,7 @@ Node* simple_simplify(Node *node) {
             }
             break;
         case FUNCTION_DIVIDE:
-            if (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0) {
+            if (node->data.function.left == NULL || (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0)) {
                 free_node(node);
                 return create_node(NODE_CONSTANT, "0", 0, 1);
             }
@@ -212,11 +213,15 @@ Node* simple_simplify(Node *node) {
             }
             break;
         case FUNCTION_POWER:
-            if (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 1) {
+            if (node->data.function.left == NULL || (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 0)) {
+                free_node(node);
+                return create_node(NODE_CONSTANT, "0", 0, 1);
+            }
+            else if (node->data.function.left->type == NODE_CONSTANT && node->data.function.left->data.constant == 1) {
                 free_node(node);
                 return create_node(NODE_CONSTANT, "1", 0, 1);
             }
-            else if (node->data.function.right->type == NODE_CONSTANT && node->data.function.right->data.constant == 0) {
+            else if (node->data.function.left == NULL || (node->data.function.right->type == NODE_CONSTANT && node->data.function.right->data.constant == 0)) {
                 free_node(node);
                 return create_node(NODE_CONSTANT, "1", 0, 1);
             }
@@ -265,7 +270,6 @@ char** find_variables(Node *node) {
     }
     else if (node->type >= FUNCTION_ADD && node->type <= FUNCTION_EXP) {
         char **left_variables = find_variables(node->data.function.left);
-        char **right_variables = find_variables(node->data.function.right);
         for (int i = 0; left_variables[i] != NULL; i++) {
             int duplicate = 0;
             for (int j = 0; j < count; j++) {
@@ -281,23 +285,26 @@ char** find_variables(Node *node) {
                 count++;
             }
         }
-        for (int i = 0; right_variables[i] != NULL; i++) {
-            int duplicate = 0;
-            for (int j = 0; j < count; j++) {
-                if (strcmp(variables[j], right_variables[i]) == 0) {
-                    duplicate = 1;
-                    break;
+        free(left_variables);
+        if(node->data.function.right != NULL) {
+            char **right_variables = find_variables(node->data. function.right);
+            for (int i = 0; right_variables[i] != NULL; i++) {
+                int duplicate = 0;
+                for (int j = 0; j < count; j++) {
+                    if (strcmp(variables[j],    right_variables[i]) == 0) {
+                        duplicate = 1;
+                        break;
+                    }
+                }
+                if (!duplicate) {
+                    variables = (char**)realloc(variables,  (count + 1) * sizeof(char*));
+                    variables[count] = (char*)malloc    (VARIABLE_NAME_SIZE);
+                    strcpy(variables[count],    right_variables[i]);
+                    count++;
                 }
             }
-            if (!duplicate) {
-                variables = (char**)realloc(variables, (count + 1) * sizeof(char*));
-                variables[count] = (char*)malloc(VARIABLE_NAME_SIZE);
-                strcpy(variables[count], right_variables[i]);
-                count++;
-            }
+            free(right_variables);
         }
-        free(left_variables);
-        free(right_variables);
     }
     variables = (char**)realloc(variables, (count + 1) * sizeof(char*));
     variables[count] = NULL;
@@ -319,18 +326,4 @@ int is_equal(Node *node1, Node *node2) {
         if (!is_equal(node1->data.function.right, node2->data.function.right)) return 0;
         return 1;
     }
-}
-
-// monomial_simplify simplifies a monomial node.
-// A monomial node is a node that is a product of constants and variables.
-// It will record all nodes in the monomial node and the exponents of the equal node.
-// It will return a new monomial node that is simplified.
-// For example, if the input node is 2*x^2*3/x^3, the output node will be 6/x; if the input node is 2*x^2*3*x^3, the output node will be 6*x^5.
-// And it will extract pow(node,[constant]), for example, pow(sin(x),2) will be extracted as sin(x)^2.
-Node* monomial_simplify(Node *node) {
-    if (node == NULL) return NULL;
-    if (node->type != FUNCTION_MULTIPLY && node->type == FUNCTION_DIVIDE) return node;
-
-    return node;
-    // To be finished
 }
