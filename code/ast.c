@@ -189,7 +189,7 @@ Node* build_ast(const char *expression, int *current_position) {
     return result;
 }
 
-char* node_to_string(Node *node){
+char* node_to_string(Node *node, int parent_priority){
     if (node == NULL) return NULL;
     char *str = (char*)malloc(100);
     if (node->type == NODE_CONSTANT) {
@@ -197,46 +197,89 @@ char* node_to_string(Node *node){
     } else if (node->type == NODE_VARIABLE) {
         sprintf(str, "%s", node->data.variable);
     } else {
-        char *left = node_to_string(node->data.function.left);
-        char *right = node_to_string(node->data.function.right);
-        switch (node->type) {
-            case FUNCTION_ADD:
-                sprintf(str, "(%s+%s)", left, right);
-                break;
-            case FUNCTION_SUBTRACT:
-                if (left == NULL) {
-                    sprintf(str, "(-%s)", right); // This happens because -(Node) is considered as NULL-(Node)
-                } else {
-                    sprintf(str, "(%s-%s)", left, right);
-                }
-                break;
-            case FUNCTION_MULTIPLY:
-                sprintf(str, "(%s*%s)", left, right);
-                break;
-            case FUNCTION_DIVIDE:
-                sprintf(str, "(%s/%s)", left, right);
-                break;
-            case FUNCTION_POWER:
-                sprintf(str, "(%s^%s)", left, right);
-                break;
-            case FUNCTION_SIN:
-                sprintf(str, "sin(%s)", left);
-                break;
-            case FUNCTION_COS:
-                sprintf(str, "cos(%s)", left);
-                break;
-            case FUNCTION_TAN:
-                sprintf(str, "tan(%s)", left);
-                break;
-            case FUNCTION_LN:
-                sprintf(str, "ln(%s)", left);
-                break;
-            case FUNCTION_LOG:
-                sprintf(str, "log(%s,%s)", left, right);
-                break;
-            case FUNCTION_EXP:
-                sprintf(str, "exp(%s)", left);
-                break;
+        int current_priority = PRIORITY[node->type];
+        char *left = node_to_string(node->data.function.left, current_priority);
+        char *right = node_to_string(node->data.function.right, current_priority);
+        if (current_priority >= parent_priority) {
+            switch (node->type) {
+                case FUNCTION_ADD:
+                    sprintf(str, "%s+%s", left, right);
+                    break;
+                case FUNCTION_SUBTRACT:
+                    if (left == NULL) {
+                        sprintf(str, "-%s", right); // This happens because -(Node) is considered as NULL-(Node)
+                    } else {
+                        sprintf(str, "%s-%s", left, right);
+                    }
+                    break;
+                case FUNCTION_MULTIPLY:
+                    sprintf(str, "%s*%s", left, right);
+                    break;
+                case FUNCTION_DIVIDE:
+                    sprintf(str, "%s/%s", left, right);
+                    break;
+                case FUNCTION_POWER:
+                    sprintf(str, "%s^%s", left, right);
+                    break;
+                case FUNCTION_SIN:
+                    sprintf(str, "sin(%s)", left);
+                    break;
+                case FUNCTION_COS:
+                    sprintf(str, "cos(%s)", left);
+                    break;
+                case FUNCTION_TAN:
+                    sprintf(str, "tan(%s)", left);
+                    break;
+                case FUNCTION_LN:
+                    sprintf(str, "ln(%s)", left);
+                    break;
+                case FUNCTION_LOG:
+                    sprintf(str, "log(%s,%s)", left, right);
+                    break;
+                case FUNCTION_EXP:
+                    sprintf(str, "exp(%s)", left);
+                    break;
+            }
+        } else {
+            switch (node->type) {
+                case FUNCTION_ADD:
+                    sprintf(str, "(%s+%s)", left, right);
+                    break;
+                case FUNCTION_SUBTRACT:
+                    if (left == NULL) {
+                        sprintf(str, "(-%s)", right); // This happens because -(Node) is considered as NULL-(Node)
+                    } else {
+                        sprintf(str, "(%s-%s)", left, right);
+                    }
+                    break;
+                case FUNCTION_MULTIPLY:
+                    sprintf(str, "(%s*%s)", left, right);
+                    break;
+                case FUNCTION_DIVIDE:
+                    sprintf(str, "(%s/%s)", left, right);
+                    break;
+                case FUNCTION_POWER:
+                    sprintf(str, "(%s^%s)", left, right);
+                    break;
+                case FUNCTION_SIN:
+                    sprintf(str, "sin(%s)", left);
+                    break;
+                case FUNCTION_COS:
+                    sprintf(str, "cos(%s)", left);
+                    break;
+                case FUNCTION_TAN:
+                    sprintf(str, "tan(%s)", left);
+                    break;
+                case FUNCTION_LN:
+                    sprintf(str, "ln(%s)", left);
+                    break;
+                case FUNCTION_LOG:
+                    sprintf(str, "log(%s,%s)", left, right);
+                    break;
+                case FUNCTION_EXP:
+                    sprintf(str, "exp(%s)", left);
+                    break;
+            }
         }
         free(left);
         free(right);

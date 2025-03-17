@@ -49,5 +49,5 @@ Node* deep_copy_node(Node *node);
 Node* build_ast(const char *expression, int *current_position);
 
 // node_to_string converts a node to a string.
-char* node_to_string(Node *node);
+char* node_to_string(Node *node, int parent_priority);
 
