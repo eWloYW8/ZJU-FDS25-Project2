@@ -6,7 +6,13 @@
 
 此仓库将保持 private 状态，确保不违反诚信守则
 
-# 原题
+# Usage
+
+You can build this project with CMake.
+
+To be finished...
+
+# Problem
 
 ## Hard Autograd for Algebraic Expressions
 The application of automatic differentiation technology in frameworks such as torch and tensorflow has greatly facilitated people's implementation and training of deep learning algorithms based on backpropagation. Now, we hope to implement an automatic differentiation program for algebraic expressions.
