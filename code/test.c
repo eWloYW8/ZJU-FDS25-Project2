@@ -1,6 +1,7 @@
 #include "ast.h"
 #include "utils.h"
 #include "astmath.h"
+#include "simplificator/one_layer.h"
 
 #include <stdlib.h>
 #include <stdio.h>
