@@ -1,5 +1,5 @@
 #include "ast.h"
-#include "stack.h"
+#include "ads/stack.h"
 
 #include <stdlib.h>
 #include <string.h>
