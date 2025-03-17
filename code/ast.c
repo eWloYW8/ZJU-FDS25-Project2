@@ -293,3 +293,11 @@ char* _node_to_string(Node *node, int parent_priority){
 char* node_to_string(Node *node) {
     return _node_to_string(node, -1);
 }
+
+Node* rebuild_ast(Node *node) {
+    char *str = node_to_string(node);
+    int current_position = 0;
+    Node *new_node = build_ast(str, &current_position);
+    free(str);
+    return new_node;
+}

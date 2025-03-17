@@ -54,3 +54,5 @@ char* _node_to_string(Node *node, int parent_priority);
 // node_to_string converts a node to a string.
 char* node_to_string(Node *node);
 
+// rebuild_ast rebuilds an AST from a existing AST (through string).
+Node* rebuild_ast(Node *node);
