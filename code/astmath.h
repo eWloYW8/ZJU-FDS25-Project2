@@ -26,6 +26,6 @@ Node* simple_simplify(Node *node);
 // The last element of the array is NULL.
 char** find_variables(Node *node);
 
-// is_equal checks if two nodes are equal.
+// is_equal checks if two nodes are structurally equal.
 // It returns 1 if they are equal, 0 otherwise.
 int is_equal(Node *node1, Node *node2);

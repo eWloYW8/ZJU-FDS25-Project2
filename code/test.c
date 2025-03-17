@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int main(){
+int main() {
     char expression[] = "a*10*b+2^a/a";
     remove_blankspace(expression);
     int current_position = 0;
