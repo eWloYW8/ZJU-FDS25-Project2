@@ -1,4 +1,4 @@
-#include "./stack.h"
+#include "stack.h"
 
 Stack* create_stack(int capacity) {
     Stack *s = (Stack*)malloc(sizeof(Stack));
@@ -6,6 +6,11 @@ Stack* create_stack(int capacity) {
     s->top = -1;
     s->capacity = capacity;
     return s;
+}
+
+void free_stack(Stack *s) {
+    free(s->data);
+    free(s);
 }
 
 void push(Stack *s, Node *node) {
