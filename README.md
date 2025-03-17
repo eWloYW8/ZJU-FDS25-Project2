@@ -10,7 +10,7 @@
 
 You can build this project with CMake.
 
-To be finished...
+> To be finished...
 
 # Note
 
