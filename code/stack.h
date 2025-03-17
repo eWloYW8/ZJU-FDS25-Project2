@@ -2,8 +2,7 @@
 // The Stack data structure is a stack of Node pointers.
 #pragma once
 
-#include <stdlib.h>
-#include "./ast.h"
+#include "ast.h"
 
 typedef struct Stack {
     Node **data;

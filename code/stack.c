@@ -1,4 +1,5 @@
 #include "stack.h"
+#include <stdlib.h>
 
 Stack* create_stack(int capacity) {
     Stack *s = (Stack*)malloc(sizeof(Stack));
