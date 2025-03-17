@@ -124,7 +124,6 @@ Node* build_ast(const char *expression, int *current_position) {
                 Node* node = create_node(FUNCTION_LOG, NULL, 0, 0);
                 (*current_position)++;
                 node->data.function.left = build_ast(expression, current_position);
-                (*current_position)++;
                 node->data.function.right = build_ast(expression, current_position);
                 push(operands, node);
             } else if (strcmp(str, "exp") == 0) {
@@ -189,7 +188,7 @@ Node* build_ast(const char *expression, int *current_position) {
     return result;
 }
 
-char* node_to_string(Node *node, int parent_priority){
+char* _node_to_string(Node *node, int parent_priority){
     if (node == NULL) return NULL;
     char *str = (char*)malloc(100);
     if (node->type == NODE_CONSTANT) {
@@ -198,8 +197,8 @@ char* node_to_string(Node *node, int parent_priority){
         sprintf(str, "%s", node->data.variable);
     } else {
         int current_priority = PRIORITY[node->type];
-        char *left = node_to_string(node->data.function.left, current_priority);
-        char *right = node_to_string(node->data.function.right, current_priority);
+        char *left = _node_to_string(node->data.function.left, current_priority);
+        char *right = _node_to_string(node->data.function.right, current_priority);
         if (current_priority >= parent_priority) {
             switch (node->type) {
                 case FUNCTION_ADD:
@@ -291,3 +290,6 @@ char* node_to_string(Node *node, int parent_priority){
     return str;
 }
 
+char* node_to_string(Node *node) {
+    return _node_to_string(node, -1);
+}
