@@ -7,3 +7,19 @@ void remove_blankspace(char *str){
     }
     str[count] = '\0';
 }
+
+long long longlong_pow(long long base, int exponent){
+    long long result = 1;
+    while (exponent > 0){
+        if (exponent % 2 == 1){
+            result *= base;
+        }
+        exponent >>= 1;
+        base *= base;
+    }
+}
+
+long long gcd(long long a, long long b){
+    if (a == 0) return b;
+    return gcd(b % a, a);
+}

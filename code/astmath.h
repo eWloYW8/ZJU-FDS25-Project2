@@ -11,9 +11,9 @@ Node* differentiate(Node *node, const char *variable);
 // The last element of the array is NULL.
 char** find_variables(Node *node);
 
-// is_equal checks if two nodes are structurally equal.
+// ast_is_equal checks if two nodes are structurally equal.
 // It returns 1 if they are equal, 0 otherwise.
-int is_equal(Node *node1, Node *node2);
+int ast_is_equal(Node *node1, Node *node2);
 
 // monomial_simplify simplifies a monomial node.
 // A monomial node is a node that is a product of constants and variables.

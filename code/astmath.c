@@ -185,7 +185,7 @@ char** find_variables(Node *node) {
     return variables;
 }
 
-int is_equal(Node *node1, Node *node2) {
+int ast_is_equal(Node *node1, Node *node2) {
     if (node1 == NULL && node2 == NULL) return 1;
     if (node1 == NULL || node2 == NULL) return 0;
     if (node1->type != node2->type) return 0;
@@ -196,8 +196,8 @@ int is_equal(Node *node1, Node *node2) {
         return strcmp(node1->data.variable, node2->data.variable) == 0;
     }
     else {
-        if (!is_equal(node1->data.function.left, node2->data.function.left)) return 0;
-        if (!is_equal(node1->data.function.right, node2->data.function.right)) return 0;
+        if (!ast_is_equal(node1->data.function.left, node2->data.function.left)) return 0;
+        if (!ast_is_equal(node1->data.function.right, node2->data.function.right)) return 0;
         return 1;
     }
 }

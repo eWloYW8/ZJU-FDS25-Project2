@@ -39,6 +39,9 @@ typedef struct Node {
 // create_node creates a new node with the given data.
 Node* create_node(enum NodeType type, const char data[], int start, int end);
 
+// create_node_from_constant creates a new node from a constant.
+Node *create_node_from_constant(long long constant);
+
 // free_node frees the memory of a node and its children.
 void free_node(Node *node);
 
@@ -56,3 +59,6 @@ char* node_to_string(Node *node);
 
 // rebuild_ast rebuilds an AST from a existing AST (through string).
 Node* rebuild_ast(Node *node);
+
+// get_hash returns the hash of a node.
+unsigned long long ast_get_hash(Node *node);

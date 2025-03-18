@@ -1,0 +1,5 @@
+#include "./expressionobj.h"
+#include "./monomial.h"
+#include "./polynomial.h"
+#include "../ast.h"
+#include "../ads/hashtable.h"

@@ -57,6 +57,13 @@ Node* create_node(enum NodeType type, const char data[], int start, int end) {
     return node;
 }
 
+Node* create_node_from_constant(long long constant) {
+    Node *node = (Node*)malloc(sizeof(Node));
+    node->type = NODE_CONSTANT;
+    node->data.constant = constant;
+    return node;
+}
+
 void free_node(Node *node) {
     if (node == NULL) return;
     if (node->type >= FUNCTION_ADD && node->type <= FUNCTION_LOG) {
@@ -192,7 +199,11 @@ char* _node_to_string(Node *node, int parent_priority){
     if (node == NULL) return NULL;
     char *str = (char*)malloc(100);
     if (node->type == NODE_CONSTANT) {
-        sprintf(str, "%lld", node->data.constant);
+        if (node->data.constant < 0 && parent_priority > 1) {
+            sprintf(str, "(%lld)", node->data.constant);
+        } else {
+            sprintf(str, "%lld", node->data.constant);
+        }
     } else if (node->type == NODE_VARIABLE) {
         sprintf(str, "%s", node->data.variable);
     } else {
@@ -334,4 +345,17 @@ Node* rebuild_ast(Node *node) {
     Node *new_node = build_ast(str, &current_position);
     free(str);
     return new_node;
+}
+
+unsigned long long ast_get_hash(Node *node) {
+    if (node == NULL) return 0;
+    if (node->type == NODE_CONSTANT) {
+        return node->data.constant;
+    } else if (node->type == NODE_VARIABLE) {
+        return node->data.variable[0];
+    } else {
+        unsigned long long left = ast_get_hash(node->data.function.left);
+        unsigned long long right = ast_get_hash(node->data.function.right);
+        return left * 31 + right;
+    }
 }
