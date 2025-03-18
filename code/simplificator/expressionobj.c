@@ -3,6 +3,7 @@
 #include "./polynomial.h"
 #include "../ast.h"
 #include "../astmath.h"
+#include "ExpressionObj.h"
 
 #include <stdlib.h>
 
@@ -116,10 +117,22 @@ ExpressionObj* expression_obj_from_ast(Node *ast) {
             return obj;
         }
         else if (polynomial_get_length(polynomial) == 1 && polynomial->constant == 0) {
-            ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_MONOMIAL);
-            obj->data.monomial = monomial_from_ast(polynomial_to_ast(polynomial));
-            free_polynomial(polynomial);
-            return obj;
+            HashNode* hashnode = getone_in_hash_table(polynomial->expressionobjects);
+            if (hashnode == NULL) {
+                ExpressionObj* obj = create_expression_obj(EXPRESSION_OBJ_AST);
+                obj->data.ast = create_node_from_constant(polynomial->constant);
+                free_polynomial(polynomial);
+                return obj;
+            }
+            else {
+                free_polynomial(polynomial);
+                ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_MONOMIAL);
+                obj->data.monomial = create_monomial();
+                insert_hash_table(obj->data.monomial->expressionobjects, hashnode->key);
+                obj->data.monomial->coefficient = hashnode->value;
+                obj->data.monomial->coefficient_denominator = 1;
+                return obj;
+            }
         }
         else {
             ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_POLYNOMIAL);

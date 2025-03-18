@@ -25,8 +25,11 @@ Monomial* deep_copy_monomial(Monomial *monomial);
 // monomial_is_equal checks if two monomials are equal.
 int monomial_is_equal(Monomial *monomial1, Monomial *monomial2);
 
+// monomial_sortexponent sorts the exponents of a monomial.
+void monomial_sortexponent(Monomial *monomial);
+
 // monomial_addobject adds a object to a monomial.
-void monomial_addobject(Monomial *monomial, struct ExpressionObj *object);
+void monomial_addobject(Monomial *monomial, struct ExpressionObj *object, long long current_exponent_magnification);
 
 // monomial_to_ast converts a monomial to an AST node.
 Node* monomial_to_ast(Monomial *monomial);
