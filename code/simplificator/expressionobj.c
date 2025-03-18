@@ -4,6 +4,8 @@
 #include "../ast.h"
 #include "../astmath.h"
 
+#include <stdlib.h>
+
 // create_expression_obj creates a new expression object.
 ExpressionObj* create_expression_obj(enum ExpressionObjType type) {
     ExpressionObj *obj = malloc(sizeof(ExpressionObj));
