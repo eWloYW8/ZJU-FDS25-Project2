@@ -1,31 +1,26 @@
 #pragma once
 
-enum HashNodeType {
-    HASH_NODE_MONOMIAL,
-    HASH_NODE_POLYNOMIAL,
-};
+struct ExpressionObj;
 
 struct HashNode {
-    enum HashNodeType type;
-    union {
-        struct PolynomialNode* polynomialnode;
-        struct MonomialNode* monomialnode;
-    } data;
+    struct ExpressionObj* key;
+    long long value;
 };
 
 typedef struct HashTableEntry {
-    long long hash;
+    unsigned long long hash;
     struct HashNode* obj;
     struct HashTableEntry* next;
 } HashTableEntry;
 
 typedef struct {
-    enum HashNodeType type;
     HashTableEntry** buckets;
     unsigned long long size;
 } HashTable;
 
-HashTable* create_hash_table(unsigned long long size, enum HashNodeType type);
+HashTable* create_hash_table(unsigned long long size);
+
+extern unsigned long long expression_obj_get_hash(struct ExpressionObj* obj);
 
 void free_hash_table(HashTable* table);
 

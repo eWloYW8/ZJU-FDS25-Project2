@@ -7,11 +7,6 @@
 
 struct ExpressionObj;
 
-typedef struct PolynomialNode {
-    long long coefficient;
-    struct ExpressionObj *data;
-} PolynomialNode;
-
 typedef struct Polynomial {
     long long constant;
     HashTable *expressionobjects;

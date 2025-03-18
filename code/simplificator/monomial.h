@@ -7,11 +7,6 @@
 
 struct ExpressionObj;
 
-typedef struct MonomialNode {
-    struct ExpressionObj *coefficient;
-    long long exponent;
-} MonomialNode;
-
 typedef struct Monomial {
     long long coefficient;
     long long coefficient_denominator;
