@@ -28,6 +28,9 @@ Monomial* deep_copy_monomial(Monomial *monomial);
 // monomial_is_equal checks if two monomials are equal.
 int monomial_is_equal(Monomial *monomial1, Monomial *monomial2);
 
+// monomial_addnode adds a node to a monomial.
+void monomial_addnode(Monomial *monomial, struct ExpressionObj *coefficient, long long exponent);
+
 // monomial_to_ast converts a monomial to an AST node.
 Node* monomial_to_ast(Monomial *monomial);
 
@@ -39,3 +42,6 @@ Monomial* monomial_from_ast(Node *ast);
 
 // monomial_append_from_ast appends a monomial from an AST node.
 void monomial_append_from_ast(Monomial *monomial, Node *ast, long long current_exponent_magnification);
+
+// monomial_get_length returns the length of a monomial.
+int monomial_get_length(Monomial *monomial);

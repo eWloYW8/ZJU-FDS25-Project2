@@ -11,6 +11,7 @@ typedef struct PolynomialNode {
 } PolynomialNode;
 
 typedef struct Polynomial {
+    long long constant;
     HashTable *expressionobjects;
 } Polynomial;
 
@@ -26,6 +27,9 @@ Polynomial* deep_copy_polynomial(Polynomial *polynomial);
 // polynomial_is_equal checks if two polynomials are equal.
 int polynomial_is_equal(Polynomial *polynomial1, Polynomial *polynomial2);
 
+// polynomial_addnode adds a node to a polynomial.
+void polynomial_addnode(Polynomial *polynomial, long long coefficient, struct ExpressionObj *data);
+
 // polynomial_to_ast converts a polynomial to an AST node.
 Node* polynomial_to_ast(Polynomial *polynomial);
 
@@ -34,3 +38,6 @@ unsigned long long polynomial_get_hash(Polynomial *polynomial);
 
 // polynomial_from_ast creates a polynomial from an AST node.
 Polynomial* polynomial_from_ast(Node *ast);
+
+// polynomial_get_length returns the length of a polynomial.
+int polynomial_get_length(Polynomial *polynomial);

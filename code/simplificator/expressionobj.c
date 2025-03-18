@@ -105,14 +105,47 @@ ExpressionObj* expression_obj_from_ast(Node *ast) {
         return obj;
     }
     else if(ast->type >= FUNCTION_ADD && ast->type <= FUNCTION_SUBTRACT) {
-        ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_POLYNOMIAL);
-        obj->data.polynomial = polynomial_from_ast(ast);
-        return obj;
+        Polynomial* polynomial = polynomial_from_ast(ast);
+        if (polynomial_get_length(polynomial) == 0) {
+            free_polynomial(polynomial);
+            ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_AST);
+            obj->data.ast = create_node_from_constant(polynomial->constant);
+            free_polynomial(polynomial);
+            return obj;
+        }
+        else if (polynomial_get_length(polynomial) == 1 && polynomial->constant == 0) {
+            ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_MONOMIAL);
+            obj->data.monomial = monomial_from_ast(polynomial_to_ast(polynomial));
+            free_polynomial(polynomial);
+            return obj;
+        }
+        else {
+            ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_POLYNOMIAL);
+            obj->data.polynomial = polynomial;
+            return obj;
+        }
     }
     else if(ast->type >= FUNCTION_MULTIPLY && ast->type <= FUNCTION_DIVIDE) {
-        ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_MONOMIAL);
-        obj->data.monomial = monomial_from_ast(ast);
-        return obj;
+        Monomial* monomial = monomial_from_ast(ast);
+        if (monomial->coefficient == 0) {
+            free_monomial(monomial);
+            ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_AST);
+            obj->data.ast = create_node_from_constant(0);
+            free_monomial(monomial);
+            return obj;
+        }
+        else if (monomial_get_length(monomial) == 0) {
+            free_monomial(monomial);
+            ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_AST);
+            obj->data.ast = create_node_from_constant(monomial->coefficient);
+            free_monomial(monomial);
+            return obj;
+        }
+        else {
+            ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_MONOMIAL);
+            obj->data.monomial = monomial;
+            return obj;
+        }
     }
     else {
         ExpressionObj *obj = create_expression_obj(EXPRESSION_OBJ_AST);
