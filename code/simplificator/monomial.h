@@ -3,6 +3,8 @@
 #include "../ast.h"
 #include "../ads/hashtable.h"
 
+#define MONOMIAL_SIZE 100
+
 struct ExpressionObj;
 
 typedef struct MonomialNode {
@@ -28,8 +30,8 @@ Monomial* deep_copy_monomial(Monomial *monomial);
 // monomial_is_equal checks if two monomials are equal.
 int monomial_is_equal(Monomial *monomial1, Monomial *monomial2);
 
-// monomial_addnode adds a node to a monomial.
-void monomial_addnode(Monomial *monomial, struct ExpressionObj *coefficient, long long exponent);
+// monomial_addobject adds a object to a monomial.
+void monomial_addobject(Monomial *monomial, struct ExpressionObj *object);
 
 // monomial_to_ast converts a monomial to an AST node.
 Node* monomial_to_ast(Monomial *monomial);

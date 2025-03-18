@@ -3,6 +3,8 @@
 #include "../ast.h"
 #include "../ads/hashtable.h"
 
+#define POLYNOMIAL_SIZE 100
+
 struct ExpressionObj;
 
 typedef struct PolynomialNode {
@@ -27,8 +29,8 @@ Polynomial* deep_copy_polynomial(Polynomial *polynomial);
 // polynomial_is_equal checks if two polynomials are equal.
 int polynomial_is_equal(Polynomial *polynomial1, Polynomial *polynomial2);
 
-// polynomial_addnode adds a node to a polynomial.
-void polynomial_addnode(Polynomial *polynomial, long long coefficient, struct ExpressionObj *data);
+// polynomial_addobject adds a object to a polynomial.
+void polynomial_addobject(Polynomial *polynomial, struct ExpressionObj *object);
 
 // polynomial_to_ast converts a polynomial to an AST node.
 Node* polynomial_to_ast(Polynomial *polynomial);

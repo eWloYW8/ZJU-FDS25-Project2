@@ -1,11 +1,19 @@
 #include "./hashtable.h"
 #include "../simplificator/ExpressionObj.h"
+#include "../simplificator/monomial.h"
+#include "../simplificator/polynomial.h"
 
+#include <stdlib.h>
+#include <string.h>
 
-HashTable* create_hash_table(unsigned long long size) {
+HashTable* create_hash_table(unsigned long long size, enum HashNodeType type) {
     HashTable* table = (HashTable*)malloc(sizeof(HashTable));
-    table->buckets = (HashTableEntry**)calloc(size, sizeof(HashTableEntry*));
+    table->buckets = (HashTableEntry**)malloc(sizeof(HashTableEntry*) * size);
     table->size = size;
+    table->type = type;
+    for (unsigned long long i = 0; i < size; ++i) {
+        table->buckets[i] = NULL;
+    }
     return table;
 }
 
@@ -14,7 +22,6 @@ void free_hash_table(HashTable* table) {
         HashTableEntry* entry = table->buckets[i];
         while (entry) {
             HashTableEntry* next = entry->next;
-            free_expression_obj(entry->obj);
             free(entry);
             entry = next;
         }
@@ -23,46 +30,17 @@ void free_hash_table(HashTable* table) {
     free(table);
 }
 
-void insert(HashTable* table, struct ExpressionObj* obj) {
-    long long hash = expression_obj_get_hash(obj);
-    unsigned long long index = hash % table->size;
-    HashTableEntry* new_entry = (HashTableEntry*)malloc(sizeof(HashTableEntry));
-    new_entry->hash = hash;
-    new_entry->obj = deep_copy_expression_obj(obj);
-    new_entry->next = table->buckets[index];
-    table->buckets[index] = new_entry;
-}
-
-struct ExpressionObj* find(HashTable* table, struct ExpressionObj* obj) {
-    long long hash = expression_obj_get_hash(obj);
-    unsigned long long index = hash % table->size;
-    HashTableEntry* entry = table->buckets[index];
-    while (entry) {
-        if (entry->hash == hash && expression_obj_is_equal(entry->obj, obj)) {
-            return entry->obj;
-        }
-        entry = entry->next;
+void insert(HashTable* table, struct HashNode* obj) {
+    unsigned long long hash = 0;
+    if (table->type == HASH_NODE_MONOMIAL) {
+        hash = expression_obj_get_hash(obj->data.monomialnode->coefficient);
+    } else if (table->type == HASH_NODE_POLYNOMIAL) {
+        hash = expression_obj_get_hash(obj->data.polynomialnode->data);
     }
-    return NULL;
-}
-
-void remove(HashTable* table, struct ExpressionObj* obj) {
-    long long hash = expression_obj_get_hash(obj);
     unsigned long long index = hash % table->size;
-    HashTableEntry* entry = table->buckets[index];
-    HashTableEntry* prev = NULL;
-    while (entry) {
-        if (entry->hash == hash && expression_obj_is_equal(entry->obj, obj)) {
-            if (prev) {
-                prev->next = entry->next;
-            } else {
-                table->buckets[index] = entry->next;
-            }
-            free_expression_obj(entry->obj);
-            free(entry);
-            return;
-        }
-        prev = entry;
-        entry = entry->next;
-    }
+    HashTableEntry* entry = (HashTableEntry*)malloc(sizeof(HashTableEntry));
+    entry->hash = hash;
+    entry->obj = obj;
+    entry->next = table->buckets[index];
+    table->buckets[index] = entry;
 }
