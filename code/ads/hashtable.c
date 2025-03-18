@@ -1,5 +1,5 @@
 #include "./hashtable.h"
-#include "../simplificator/ExpressionObj.h"
+#include "../simplificator/expressionobj.h"
 #include "../simplificator/monomial.h"
 #include "../simplificator/polynomial.h"
 
