@@ -3,7 +3,6 @@
 #include "./polynomial.h"
 #include "../ast.h"
 #include "../astmath.h"
-#include "ExpressionObj.h"
 
 #include <stdlib.h>
 
