@@ -76,15 +76,7 @@ void remove_hash_table(HashTable* table, struct ExpressionObj* obj) {
     }
 }
 
-int is_empty_hash_table(HashTable* table) {
-    return table->count == 0;
-}
-
-int is_only_one_hash_table(HashTable *table) {
-    return table->count == 1;
-}
-
-int count_hash_table(HashTable* table) {
+unsigned long long count_hash_table(HashTable* table) {
     return table->count;
 }
 
