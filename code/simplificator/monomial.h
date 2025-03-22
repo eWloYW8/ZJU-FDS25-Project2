@@ -1,50 +1,52 @@
 #pragma once
 
-// Monomial is a hash table, where the keys are polynomials (base) and the values are polynomials (exponent).
+// Monomial is a hash table, where the keys are ExpressionObj (excluding Monomial) (base) and the values are ExpressionObj (excluding Monomial) (exponent).
+// Monomial must be a element of Polynomial.
 
 #include "./expressionobj.h"
 #include "../ast.h"
-#include "astmath.h"
 
-typedef struct Polynomial Polynomial;
+struct Polynomial;
 
-typedef struct MonimialNode {
+typedef struct MonomialNode {
     ExpressionObj* key;
     ExpressionObj* value;
-} MonimialNode;
+} MonomialNode;
 
-typedef struct MonimialEntry {
+typedef struct MonomialEntry {
     unsigned long long hash;
-    MonimialNode* obj;
-    struct MonimialEntry* next;
-} MonimialEntry;
+    MonomialNode* obj;
+    struct MonomialEntry* next;
+} MonomialEntry;
 
-typedef struct {
-    MonimialEntry** buckets;
+typedef struct Monomial {
+    MonomialEntry** buckets;
     unsigned long long size;
     unsigned long long count;
     long long coeffecient;
-    long long coeffecient_
-} Monimial;
+    long long coeffecient_denominator;
+} Monomial;
 
-Monimial* create_monomial(unsigned long long size);
+Monomial* create_monomial(unsigned long long size);
 
-void free_monomial(Monimial* table);
+void free_monomial(Monomial* table);
 
-MonimialNode* insert_monomial(Monimial* table, ExpressionObj* key, ExpressionObj* value);
+MonomialNode* insert_monomial(Monomial* table, ExpressionObj* key, ExpressionObj* value);
 
-MonimialNode* find_monomial(Monimial* table, ExpressionObj* key);
+MonomialNode* find_monomial(Monomial* table, ExpressionObj* key);
 
-void remove_monomial(Monimial* table, ExpressionObj* key);
+void remove_monomial(Monomial* table, ExpressionObj* key);
 
-unsigned long long count_monomial(Monimial* table);
+unsigned long long count_monomial(Monomial* table);
 
-MonimialNode* getone_in_monomial(Monimial* table);
+unsigned long long hash_monomial(Monomial* table);
 
-unsigned long long hash_monomial(ExpressionObj* key);
+int is_equal_monomial(Monomial* obj1, Monomial* obj2);
 
-int is_equal_monomial(ExpressionObj* obj1, ExpressionObj* obj2);
+Monomial* deep_copy_monomial(Monomial* table);
 
-Monimial* deep_copy_monomial(Monimial* table);
+Monomial* create_monomial_from_ast(Node* node,struct Polynomial* parent, Monomial* current_monomial);
 
-Monimial* create_monomial_from_ast(Node* node, Polynomial* parent);
+void sort_coefficient_monomial(Monomial* table);
+
+Node* monomial_to_ast(Monomial* table);

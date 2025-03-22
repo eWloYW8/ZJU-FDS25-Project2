@@ -2,9 +2,9 @@
 
 #include "../ast.h"
 
-typedef struct Monomial Monomial;
+struct Monomial;
 
-typedef struct Polynomial Polynomial;
+struct Polynomial;
 
 typedef struct sinObj {
     struct ExpressionObj* arg;
@@ -31,6 +31,11 @@ typedef struct expObj {
     struct ExpressionObj* arg;
 } expObj;
 
+typedef struct powObj {
+    struct ExpressionObj* base;
+    struct ExpressionObj* exponent;
+} powObj;
+
 enum ExpressionObjType {
     EXPR_OBJ_TYPE_Monomial,
     EXPR_OBJ_TYPE_Polynomial,
@@ -39,7 +44,10 @@ enum ExpressionObjType {
     EXPR_OBJ_TYPE_Tan,
     EXPR_OBJ_TYPE_Ln,
     EXPR_OBJ_TYPE_Log,
-    EXPR_OBJ_TYPE_Exp
+    EXPR_OBJ_TYPE_Exp,
+    EXPR_OBJ_TYPE_Pow,
+    EXPR_OBJ_TYPE_Constant,
+    EXPR_OBJ_TYPE_Variable
 } type;
 
 typedef struct ExpressionObj {
@@ -53,6 +61,9 @@ typedef struct ExpressionObj {
         struct lnObj ln;
         struct logObj log;
         struct expObj exp;
+        struct powObj pow;
+        long long constant;
+        char variable[VARIABLE_NAME_SIZE];
     };
 } ExpressionObj;
 
@@ -64,7 +75,7 @@ int is_equal_expression_obj(ExpressionObj* obj1, ExpressionObj* obj2);
 
 long long hash_expression_obj(ExpressionObj* obj);
 
-ExpressionObj create_expression_obj_from_ast(Node* node);
+ExpressionObj* create_expression_obj_from_ast(Node* node);
 
 ExpressionObj* deep_copy_expression_obj(ExpressionObj* obj);
 
