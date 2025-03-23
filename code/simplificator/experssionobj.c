@@ -323,3 +323,34 @@ Node* expression_obj_to_ast(ExpressionObj* obj) {
     }
     return node;
 }
+
+int is_zero_expression_obj(ExpressionObj* obj) {
+    if (obj == NULL) {
+        return 0;
+    }
+    switch (obj->type) {
+        case EXPR_OBJ_TYPE_Monomial:
+            return is_zero_monomial(obj->monomial);
+        case EXPR_OBJ_TYPE_Polynomial:
+            return is_zero_polynomial(obj->polynomial);
+        case EXPR_OBJ_TYPE_Sin:
+            return is_zero_expression_obj(obj->sin.arg);
+        case EXPR_OBJ_TYPE_Cos:
+            return is_zero_expression_obj(obj->cos.arg);
+        case EXPR_OBJ_TYPE_Tan:
+            return is_zero_expression_obj(obj->tan.arg);
+        case EXPR_OBJ_TYPE_Ln:
+            return is_zero_expression_obj(obj->ln.arg);
+        case EXPR_OBJ_TYPE_Log:
+            return is_zero_expression_obj(obj->log.base) && is_zero_expression_obj(obj->log.arg);
+        case EXPR_OBJ_TYPE_Exp:
+            return is_zero_expression_obj(obj->exp.arg);
+        case EXPR_OBJ_TYPE_Pow:
+            return is_zero_expression_obj(obj->pow.base) && is_zero_expression_obj(obj->pow.exponent);
+        case EXPR_OBJ_TYPE_Constant:
+            return obj->constant == 0;
+        case EXPR_OBJ_TYPE_Variable:
+            return 0;
+    }
+    return 0;
+}

@@ -31,11 +31,11 @@ Monomial* create_monomial(unsigned long long size);
 
 void free_monomial(Monomial* table);
 
-MonomialNode* insert_monomial(Monomial* table, ExpressionObj* key, ExpressionObj* value);
-
 MonomialNode* find_monomial(Monomial* table, ExpressionObj* key);
 
 void remove_monomial(Monomial* table, ExpressionObj* key);
+
+MonomialNode* insert_monomial(Monomial* table, ExpressionObj* key, ExpressionObj* value);
 
 unsigned long long count_monomial(Monomial* table);
 
@@ -50,3 +50,5 @@ Monomial* create_monomial_from_ast(Node* node,struct Polynomial* parent, Monomia
 void sort_coefficient_monomial(Monomial* table);
 
 Node* monomial_to_ast(Monomial* table);
+
+int is_zero_monomial(Monomial* table);

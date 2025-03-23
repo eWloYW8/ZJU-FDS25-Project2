@@ -57,6 +57,13 @@ Node* create_node(enum NodeType type, const char data[], int start, int end) {
     return node;
 }
 
+Node* create_node_from_constant(long long constant) {
+    Node *node = (Node*)malloc(sizeof(Node));
+    node->type = NODE_CONSTANT;
+    node->data.constant = constant;
+    return node;
+}
+
 void free_node(Node *node) {
     if (node == NULL) return;
     if (node->type >= FUNCTION_ADD && node->type <= FUNCTION_LOG) {

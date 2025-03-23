@@ -81,3 +81,4 @@ ExpressionObj* deep_copy_expression_obj(ExpressionObj* obj);
 
 Node* expression_obj_to_ast(ExpressionObj* obj);
 
+int is_zero_expression_obj(ExpressionObj* obj);

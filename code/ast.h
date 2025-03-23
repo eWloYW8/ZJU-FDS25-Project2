@@ -39,6 +39,8 @@ typedef struct Node {
 // create_node creates a new node with the given data.
 Node* create_node(enum NodeType type, const char data[], int start, int end);
 
+Node* create_node_from_constant(long long constant);
+
 // free_node frees the memory of a node and its children.
 void free_node(Node *node);
 

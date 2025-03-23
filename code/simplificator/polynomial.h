@@ -7,7 +7,8 @@ struct Monomial;
 
 typedef struct PolynomialNode {
     ExpressionObj* key;
-    ExpressionObj* value;
+    long long value;
+    long long value_denominator;
 } PolynomialNode;
 
 typedef struct PolynomialEntry {
@@ -20,19 +21,19 @@ typedef struct Polynomial {
     PolynomialEntry** buckets;
     unsigned long long size;
     unsigned long long count;
-    long long constant;
-    long long constant_denominator;
 } Polynomial;
 
 Polynomial* create_polynomial(unsigned long long size);
 
 void free_polynomial(Polynomial* table);
 
-PolynomialNode* insert_polynomial(Polynomial* table, ExpressionObj* key, ExpressionObj* value);
-
 PolynomialNode* find_polynomial(Polynomial* table, ExpressionObj* key);
 
+void sort_value_polynomialnode(PolynomialNode* node);
+
 void remove_polynomial(Polynomial* table, ExpressionObj* key);
+
+PolynomialNode* insert_polynomial(Polynomial* table, ExpressionObj* key, long long value, long long value_denominator);
 
 unsigned long long count_polynomial(Polynomial* table);
 
@@ -44,6 +45,8 @@ Polynomial* deep_copy_polynomial(Polynomial* table);
 
 Polynomial* create_polynomial_from_ast(Node* node);
 
-void sort_coefficient_polynomial(Polynomial* table);
+Node* polynomialnode_to_ast(PolynomialNode* node);
 
 Node* polynomial_to_ast(Polynomial* table);
+
+int is_zero_polynomial(Polynomial* table);
