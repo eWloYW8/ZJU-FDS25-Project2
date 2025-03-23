@@ -48,7 +48,7 @@ enum ExpressionObjType {
     EXPR_OBJ_TYPE_Pow,
     EXPR_OBJ_TYPE_Constant,
     EXPR_OBJ_TYPE_Variable
-} type;
+};
 
 typedef struct ExpressionObj {
     enum ExpressionObjType type;

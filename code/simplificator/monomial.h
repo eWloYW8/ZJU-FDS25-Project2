@@ -45,10 +45,12 @@ int is_equal_monomial(Monomial* obj1, Monomial* obj2);
 
 Monomial* deep_copy_monomial(Monomial* table);
 
-Monomial* create_monomial_from_ast(Node* node,struct Polynomial* parent, Monomial* current_monomial);
-
 void sort_coefficient_monomial(Monomial* table);
+
+Node* monomialnode_to_ast(MonomialNode* node);
 
 Node* monomial_to_ast(Monomial* table);
 
 int is_zero_monomial(Monomial* table);
+
+void multiply_monomial(Monomial* table, Monomial* monomial);
