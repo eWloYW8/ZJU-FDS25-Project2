@@ -192,7 +192,11 @@ char* _node_to_string(Node *node, int parent_priority){
     if (node == NULL) return NULL;
     char *str = (char*)malloc(100);
     if (node->type == NODE_CONSTANT) {
-        sprintf(str, "%lld", node->data.constant);
+        if (node->data.constant < 0 && parent_priority > 1) {
+            sprintf(str, "(%lld)", node->data.constant);
+        } else {
+            sprintf(str, "%lld", node->data.constant);
+        }
     } else if (node->type == NODE_VARIABLE) {
         sprintf(str, "%s", node->data.variable);
     } else {
