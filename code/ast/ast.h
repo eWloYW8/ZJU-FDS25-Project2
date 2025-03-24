@@ -1,4 +1,5 @@
 // AST (Abstract Syntax Tree) is a tree representation of a mathematical expression.
+// This file provides the definition of the AST and basic functions to manipulate it.
 #pragma once
 
 // NodeType is the type of a node in the AST.
@@ -50,7 +51,7 @@ Node* deep_copy_node(Node *node);
 // build_ast builds an AST from an expression.
 Node* build_ast(const char *expression, int *current_position);
 
-
+// _node_to_string converts a node to a string with a given parent priority.
 char* _node_to_string(Node *node, int parent_priority);
 
 // node_to_string converts a node to a string.

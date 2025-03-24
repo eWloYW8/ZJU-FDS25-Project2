@@ -1,3 +1,5 @@
+// This file contains the declaration of the one-layer simplification function for the AST.
+
 #pragma once
 
 #include "ast.h"
