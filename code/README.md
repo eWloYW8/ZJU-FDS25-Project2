@@ -68,6 +68,8 @@ This module provides a simplified entry point for the differentiation program. I
 
 # How to Build and Run
 
+> If you feel confused, you can skip to [Binary Release](#release)
+
 This project is organized with CMake, a cross-platform build system. Below are the steps to build and run the project on your local machine.
 
 ## Prerequisites
@@ -185,4 +187,22 @@ from the build directory. CMake will automatically detect changes and recompile 
   cmake -DCMAKE_BUILD_TYPE=Release ..
   ```
 
+# <span id="release">Binary Release</span>
+
+Binary releases for **Windows-amd64** and **Linux-amd64** are provided.
+
+Remind that you shouldn't directly double-click the executable files, but run them in terminal with arguments quoted by "". 
+
+## Windows 
+
+**Compiler**: gcc version 14.2.0 (Rev2, Built by MSYS2 project)  
+**Binaries**:
+  - simplificator.exe :  
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1228301267smL6ypHN.exe
+  - differentiate.exe :
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1229168843J88qvybK.exe
+  - differentiate_simplified.exe :
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1229347921kPQ9qLoz.exe
+
+## Linux
 
