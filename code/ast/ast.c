@@ -254,7 +254,7 @@ char* _node_to_string(Node *node, int parent_priority){
         int current_priority = PRIORITY[node->type];
         char *left = NULL;
         char *right = NULL;
-        if (current_priority > parent_priority) {
+        if (current_priority >= parent_priority) {
             // If the current node has higher priority than the parent, no parentheses are needed.
             switch (node->type) {
                 case FUNCTION_ADD:
@@ -264,7 +264,7 @@ char* _node_to_string(Node *node, int parent_priority){
                     break;
                 case FUNCTION_SUBTRACT:
                     left = _node_to_string(node->data.function.left, current_priority);
-                    right = _node_to_string(node->data.function.right, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority+1);
                     if (left == NULL) {
                         sprintf(str, "-%s", right); // Handle unary minus.
                     } else {
@@ -278,7 +278,7 @@ char* _node_to_string(Node *node, int parent_priority){
                     break;
                 case FUNCTION_DIVIDE:
                     left = _node_to_string(node->data.function.left, current_priority);
-                    right = _node_to_string(node->data.function.right, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority+1);
                     sprintf(str, "%s/%s", left, right);
                     break;
                 case FUNCTION_POWER:
@@ -324,7 +324,7 @@ char* _node_to_string(Node *node, int parent_priority){
                     break;
                 case FUNCTION_SUBTRACT:
                     left = _node_to_string(node->data.function.left, current_priority);
-                    right = _node_to_string(node->data.function.right, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority+1);
                     if (left == NULL) {
                         sprintf(str, "(-%s)", right); // Handle unary minus.
                     } else {
@@ -338,7 +338,7 @@ char* _node_to_string(Node *node, int parent_priority){
                     break;
                 case FUNCTION_DIVIDE:
                     left = _node_to_string(node->data.function.left, current_priority);
-                    right = _node_to_string(node->data.function.right, current_priority);
+                    right = _node_to_string(node->data.function.right, current_priority+1);
                     sprintf(str, "(%s/%s)", left, right);
                     break;
                 case FUNCTION_POWER:

@@ -23,9 +23,12 @@ int main(int argc, char *argv[]) {
         int current_position = 0;
         // Build the abstract syntax tree (AST) from the expression
         Node *node = build_ast(expression, &current_position);
+        char **variables = find_variables(node);
+        node = simple_simplify(node); // Simplify the expression
+        node = monomial_simplify_recursive(node); // Simplify the expression using monomials
+        node = simple_simplify(node); // Simplify the expression again
         
         // Find all variables in the expression
-        char **variables = find_variables(node);
         for (int i = 0; variables[i] != NULL; i++) {
             printf("%s: ", variables[i]);
             // Differentiate the expression with respect to the current variable
@@ -53,6 +56,9 @@ int main(int argc, char *argv[]) {
         int current_position = 0;
         // Build the abstract syntax tree (AST) from the expression
         Node *node = build_ast(expression, &current_position);
+        node = simple_simplify(node); // Simplify the expression
+        node = monomial_simplify_recursive(node); // Simplify the expression using monomials
+        node = simple_simplify(node); // Simplify the expression again
         
         // Differentiate the expression with respect to the specified variable
         Node *derivative = differentiate(node, variable);

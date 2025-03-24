@@ -91,6 +91,7 @@ void _add_monomial(Monomial *monomial, Node *node, long long exponent_magnificat
                 } else {
                     monomial->exponent[index] += exponent_magnification; // Add to the existing exponent
                 }
+                break;
             }
         default:
             index = find_monomial(monomial, node); // Find the node in the monomial
@@ -190,7 +191,7 @@ Node *monomial_simplify_recursive(Node *node) {
     if (node == NULL) {
         return NULL; // Return NULL if node is NULL
     }
-    if (node->type == FUNCTION_ADD || node->type == FUNCTION_SUBTRACT || node->type == FUNCTION_LOG || node->type == FUNCTION_EXP || node->type == FUNCTION_SIN || node->type == FUNCTION_COS || node->type == FUNCTION_TAN || node->type == FUNCTION_LN || node->type == FUNCTION_POWER) {
+    if (node->type == FUNCTION_ADD || node->type == FUNCTION_SUBTRACT || node->type == FUNCTION_LOG || node->type == FUNCTION_EXP || node->type == FUNCTION_SIN || node->type == FUNCTION_COS || node->type == FUNCTION_TAN || node->type == FUNCTION_LN || node->type == FUNCTION_POWER || node->type == FUNCTION_DIVIDE || node->type == FUNCTION_MULTIPLY) {
         node->data.function.left = monomial_simplify_recursive(node->data.function.left); // Recursively simplify left node
         node->data.function.right = monomial_simplify_recursive(node->data.function.right); // Recursively simplify right node
     }
