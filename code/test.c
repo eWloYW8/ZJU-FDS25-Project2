@@ -1,13 +1,15 @@
 #include "ast.h"
 #include "utils.h"
 #include "astmath.h"
-#include "simplificator/one_layer.h"
+#include "one_layer.h"
+#include "monomial.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 
 int main() {
     char expression[] = "x*ln(x*y)+y*cos(x)+y*sin(2*x)";
+    //char expression[] = "ln(x*2)";
     remove_blankspace(expression);
     int current_position = 0;
     Node *node = build_ast(expression, &current_position);
@@ -17,6 +19,8 @@ int main() {
     for (int i = 0; variables[i] != NULL; i++) {
         printf("%s: ", variables[i]);
         Node *derivative = differentiate(node, variables[i]);
+        derivative = simple_simplify(derivative);
+        derivative = monomial_simplify_recursive(derivative);
         derivative = simple_simplify(derivative);
         printf("%s\n", node_to_string(derivative));
         Node *derivative_rebuilt = rebuild_ast(derivative);

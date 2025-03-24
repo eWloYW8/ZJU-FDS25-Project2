@@ -1,4 +1,5 @@
-#include "./one_layer.h"
+#include "one_layer.h"
+#include "monomial.h"
 
 #include <stdlib.h>
 

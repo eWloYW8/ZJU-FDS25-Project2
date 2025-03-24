@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ast.h"
+#include "ast.h"
 
 // simplify simplifies a node.
 // This function only performs one-layer simplification.

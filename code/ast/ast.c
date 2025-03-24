@@ -57,6 +57,13 @@ Node* create_node(enum NodeType type, const char data[], int start, int end) {
     return node;
 }
 
+Node* create_node_with_constant(long long constant) {
+    Node *node = (Node*)malloc(sizeof(Node));
+    node->type = NODE_CONSTANT;
+    node->data.constant = constant;
+    return node;
+}
+
 void free_node(Node *node) {
     if (node == NULL) return;
     if (node->type >= FUNCTION_ADD && node->type <= FUNCTION_LOG) {
@@ -203,7 +210,7 @@ char* _node_to_string(Node *node, int parent_priority){
         int current_priority = PRIORITY[node->type];
         char *left = NULL;
         char *right = NULL;
-        if (current_priority >= parent_priority) {
+        if (current_priority > parent_priority) {
             switch (node->type) {
                 case FUNCTION_ADD:
                     left = _node_to_string(node->data.function.left, current_priority);
