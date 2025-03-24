@@ -1,2 +1,7 @@
 .vscode
 build
+*.aux
+*.log
+*.synctex.gz
+*.pdf
+_minted-*

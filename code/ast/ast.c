@@ -252,6 +252,9 @@ char* _node_to_string(Node *node, int parent_priority){
     } else {
         // If the node is a function, recursively convert its children to strings.
         int current_priority = PRIORITY[node->type];
+        if (node->type == FUNCTION_SUBTRACT && node->data.function.left == NULL) {
+            current_priority --; // Handle unary minus.
+        }
         char *left = NULL;
         char *right = NULL;
         if (current_priority >= parent_priority) {
