@@ -208,11 +208,11 @@ You can rename the downloaded file by yourself.
 **Compiler**: gcc version 14.2.0 (Rev2, Built by MSYS2 project)  
 **Binaries**:
   - simplificator.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/194735821579BopmsS.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2204488835hFLIiZ3I.exe
   - differentiate.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/1946518359xmXdGs08.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2205093398F6eZVhg7.exe
   - differentiate_simplified.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/1947186110vu1XsdYF.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2205207530c8uWLeec.exe
 
     
 
@@ -221,11 +221,11 @@ You can rename the downloaded file by yourself.
 **Compiler**: gcc version 12.2.0 (Debian 12.2.0-14)  
 **Binaries**:
   - simplificator：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_linux
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_linux_amd64
   - differentiate：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_linux
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_linux_amd64
   - differentiate_simplified：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_linux
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_linux_amd64
     
 
 ---
@@ -425,19 +425,19 @@ mingw32-make clean
 **编译器**：gcc 14.2.0 gcc version 14.2.0 (Rev2, Built by MSYS2 project)  
 **下载链接**：
   - simplificator.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/194735821579BopmsS.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2204488835hFLIiZ3I.exe
   - differentiate.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/1946518359xmXdGs08.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2205093398F6eZVhg7.exe
   - differentiate_simplified.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/1947186110vu1XsdYF.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2205207530c8uWLeec.exe
 
 ## Linux
 
 **编译器**：gcc 12.2.0 (Debian 12.2.0-14)  
 **下载链接**：
   - simplificator：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_linux
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_linux_amd64
   - differentiate：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_linux
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_linux_amd64
   - differentiate_simplified：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_linux
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_linux_amd64
