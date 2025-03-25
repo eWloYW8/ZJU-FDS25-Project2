@@ -19,7 +19,7 @@ enum NodeType {
     FUNCTION_EXP, // exp (unary)
 };
 
-#define VARIABLE_NAME_SIZE 10
+#define VARIABLE_NAME_SIZE 100
 
 extern int PRIORITY[];
 

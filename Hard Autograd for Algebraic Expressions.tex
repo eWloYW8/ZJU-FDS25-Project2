@@ -616,14 +616,14 @@ The code is shown in code/differentiate\_simplified.c.
 
             \makecell[c]{$log(a,b)/log(c,a)$}&
             \makecell[l]{
-                $a: ((0/b*ln(a)-ln(b)*1/a)/ln(a)^2*log(c,a)-$\\\quad$log(a,b)*(1/a*ln(c)-ln(a)*0/c)/ln(c)^2)/log(c,a)^2$ \\
-                $b: ((1/b*ln(a)-ln(b)*0/a)/ln(a)^2*log(c,a)-$\\\quad$log(a,b)*(0/a*ln(c)-ln(a)*0/c)/ln(c)^2)/log(c,a)^2$ \\
-                $c: ((0/b*ln(a)-ln(b)*0/a)/ln(a)^2*log(c,a)-$\\\quad$log(a,b)*(0/a*ln(c)-ln(a)*1/c)/ln(c)^2)/log(c,a)^2$
+                $a: ((0/b*ln(a)-ln(b)*1/a)/ln(a)^2*ln(a)/ln(c)-$\\\quad$ln(b)/ln(a)*(1/a*ln(c)-ln(a)*0/c)/ln(c)^2)/(ln(a)/ln(c))^2$ \\
+                $b: ((1/b*ln(a)-ln(b)*0/a)/ln(a)^2*ln(a)/ln(c)-$\\\quad$ln(b)/ln(a)*(0/a*ln(c)-ln(a)*0/c)/ln(c)^2)/(ln(a)/ln(c))^2$ \\
+                $c: ((0/b*ln(a)-ln(b)*0/a)/ln(a)^2*ln(a)/ln(c)-$\\\quad$ln(b)/ln(a)*(0/a*ln(c)-ln(a)*1/c)/ln(c)^2)/(ln(a)/ln(c))^2$
             }&
             \makecell[l]{
-                $a: ((-ln(b)/a)*ln(a)^{-2}*log(c,a)-$\\\quad$log(a,b)/a/ln(c))*log(c,a)^{-2}$ \\
-                $b: 1/b/ln(a)/log(c,a)$ \\
-                $c: (-log(a,b)*(-ln(a)/c)*ln(c)^{-2})*log(c,a)^{-2}$
+                $a: (-2)*ln(b)*ln(a)^{-3}/a*ln(c)$ \\
+                $b: 1/b*ln(a)^{-2}*ln(c)$ \\
+                $c: ln(b)*ln(a)^{-2}/c$
             }&
             \makecell[l]{
                 $a: -2*ln(b)*ln(c)/(ln(a)^3*a)$ \\
@@ -634,6 +634,49 @@ The code is shown in code/differentiate\_simplified.c.
         \end{tabular}
         }
     \end{table}
+
+
+    \item \textbf{Testcase 3: Variable Name Tokenization}
+    \begin{table}[H]
+        \centering
+        \resizebox{1\columnwidth}{!}{
+        \begin{tabular}{c|c|c|c} \hline 
+            Input & \makecell[c]{Output\\(No simplification)} & \makecell[c]{Output\\(Simplifiled)}&  \makecell[c]{Reference\\Results}\\ \hline 
+
+            $sin(cosval)+cos(cosval)$&
+            \makecell[l]{
+                $cosval: cos(cosval)*1+$\\\quad$(-1)*sin(cosval)$
+            }&
+            \makecell[l]{
+                $cosval: cos(cosval)+$\\\quad$(-1)*sin(cosval)$
+            }&
+            \makecell[l]{
+                $cosval: cos(cosval)-$\\\quad$sin(cosval)$ 
+            }
+            \\ \hline 
+
+            $x*xx*xxx$&
+            \makecell[l]{
+                $x: (1*xx+x*0)*xxx+x*xx*0$ \\
+                $xx: (0*xx+x*1)*xxx+x*xx*0$ \\
+                $xxx: (0*xx+x*0)*xxx+x*xx*1$
+            }&
+            \makecell[l]{
+                $x: xx*xxx$ \\
+                $xx: x*xxx$ \\
+                $xxx: x*xx$
+            }&
+            \makecell[l]{
+                $x: xx*xxx$ \\
+                $xx: x*xxx$ \\
+                $xxx: x*xx$
+            }
+            \\ \hline 
+
+        \end{tabular}
+        }
+    \end{table}
+
 \end{itemize}
 
 \newpage
