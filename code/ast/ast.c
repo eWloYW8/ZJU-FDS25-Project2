@@ -157,11 +157,13 @@ Node* build_ast(const char *expression, int *current_position) {
                 node->data.function.left = build_ast(expression, current_position); // Parse the argument.
                 push(operands, node); // Push the ln node onto the operands stack.
             } else if (strcmp(str, "log") == 0) {
-                // If the string is "log", create a logarithm function node.
-                Node* node = create_node(FUNCTION_LOG, NULL, 0, 0);
+                // If the string is "log", translate it to a divide function node.
+                Node* node = create_node(FUNCTION_DIVIDE, NULL, 0, 0);
+                node->data.function.left = create_node(FUNCTION_LN, NULL, 0, 0); // Create a ln function node.
+                node->data.function.right = create_node(FUNCTION_LN, NULL, 0, 0); // Create a ln function node.
                 (*current_position)++;
-                node->data.function.left = build_ast(expression, current_position); // Parse the first argument.
-                node->data.function.right = build_ast(expression, current_position); // Parse the second argument.
+                node->data.function.right->data.function.left = build_ast(expression, current_position); // Parse the first argument.
+                node->data.function.left->data.function.left = build_ast(expression, current_position); // Parse the second argument.
                 push(operands, node); // Push the log node onto the operands stack.
             } else if (strcmp(str, "pow") == 0) {
                 // If the string is "pow", create a pow function node.
