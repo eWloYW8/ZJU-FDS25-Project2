@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
     }
     char *expression = argv[1];
     expression = expadd0(expression); // Modify the expression to handle negative numbers
+    expression = expadd_multiply(expression); // Modify the expression to handle implicit multiplication
     remove_blankspace(expression); // Remove any blank spaces from the expression
     int current_position = 0;
     Node *node = build_ast(expression, &current_position); // Build AST from expression

@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 // Function to remove all spaces from a given string
 void remove_blankspace(char *str){
@@ -56,4 +57,27 @@ char *expadd0(char *str) {
         i++;
     }
     return str; // Return the modified string
+}
+
+// When encountering these cases, add a '*' to the expression string to ensure correct parsing:
+// 1. A number followed by an opening parenthesis, e.g., "5(".
+// 2. A closing parenthesis followed by a variable, e.g., ")x".
+// 3. A number followed by a variable, e.g., "5x".
+char *expadd_multiply(char *str) {
+    int len = strlen(str);
+    char *new_str = (char *)malloc(2 * len + 1); // Allocate memory for new string
+    int j = 0;
+    for (int i = 0; i < len; i++) {
+        new_str[j++] = str[i]; // Copy the current character
+        if (i < len - 1) {
+            if ((isdigit(str[i]) && str[i + 1] == '(') || // Case 1
+                (str[i] == ')' && isalpha(str[i + 1])) || // Case 2
+                (isdigit(str[i]) && isalpha(str[i + 1]))) { // Case 3
+                new_str[j++] = '*'; // Add '*' after the current character
+            }
+        }
+    }
+    new_str[j] = '\0'; // Null-terminate the new string
+    free(str); // Free the old string
+    return new_str; // Return the modified string
 }

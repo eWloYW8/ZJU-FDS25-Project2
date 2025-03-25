@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
     else if (argc == 2) {   
         char *expression = argv[1];
         expression = expadd0(expression); // Modify the expression to handle negative numbers
+        expression = expadd_multiply(expression); // Modify the expression to handle implicit multiplication
         // Remove any blank spaces from the expression
         remove_blankspace(expression);
         int current_position = 0;
@@ -50,6 +51,7 @@ int main(int argc, char *argv[]) {
     else if (argc == 3) {
         char *expression = argv[1];
         expression = expadd0(expression); // Modify the expression to handle negative numbers
+        expression = expadd_multiply(expression); // Modify the expression to handle implicit multiplication
         char *variable = argv[2];
         // Remove any blank spaces from the expression
         remove_blankspace(expression);

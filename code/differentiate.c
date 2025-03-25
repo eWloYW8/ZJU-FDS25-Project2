@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
         // If only expression is provided
         char *expression = argv[1];
         expression = expadd0(expression); // Modify the expression to handle negative numbers
+        expression = expadd_multiply(expression); // Modify the expression to handle implicit multiplication
         remove_blankspace(expression); // Remove any blank spaces from the expression
         int current_position = 0;
         Node *node = build_ast(expression, &current_position); // Build AST from the expression
@@ -34,6 +35,7 @@ int main(int argc, char *argv[]) {
         // If expression and specific variable are provided
         char *expression = argv[1];
         expression = expadd0(expression); // Modify the expression to handle negative numbers
+        expression = expadd_multiply(expression); // Modify the expression to handle implicit multiplication
         char *variable = argv[2];
         remove_blankspace(expression); // Remove any blank spaces from the expression
         int current_position = 0;
