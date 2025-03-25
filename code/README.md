@@ -44,6 +44,10 @@ This module provides the implementation and interface for handling monomials in 
 
 ## Misc and executables
 
+### CMakeLists.txt
+
+CMakeLists.txt is the core configuration file for the CMake build system, defining project structure, compilation options, dependencies, and cross-platform build rules to generate native build environments (e.g., Makefiles or Visual Studio projects).
+
 ### utils.c/utils.h
 
 This module provides utility functions that are used across various parts of the project. These functions include string manipulation, mathematical computations, and expression modifications.
@@ -268,6 +272,10 @@ You can rename the downloaded file by yourself.
 该模块提供了在数学表达式简化过程中处理单项式的实现和接口。包含创建、操作单项式以及与AST节点相互转换的功能。
 
 ## 杂项和可执行文件
+
+### CMakeLists.txt
+
+CMakeLists.txt 是 CMake 构建系统的核心配置文件，用于定义项目的源代码结构、编译选项、依赖关系和跨平台构建规则，自动生成原生编译环境（如 Makefile 或 Visual Studio 项目）。
 
 ### utils.c/utils.h
 

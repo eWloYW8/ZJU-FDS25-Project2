@@ -777,11 +777,99 @@ The code is shown in code/differentiate\_simplified.c.
 \chapter*{Appendix: Source Code\footnote{Source files with sufficient inline comments are provided in the "code" folder.}}
 \addcontentsline{toc}{chapter}{Appendix: Source Code}
 
-\section*{Introduction}
 \begin{itemize}
-    \item \texttt{bucket.c} \\
-    Solution code for the \textbf{Bucket Method}. Reads input arrays and target sums, outputs pairs satisfying the sum constraint. \\
-    \textbf{Usage}: \texttt{./bucket < (the output of generator)}
+    \item \textbf{Folder: ast}
+    
+    This folder includes three modules: stack, ast, and astmath.
+    \begin{itemize}
+        \item \textbf{stack.c/stack.h}
+        
+        This module provides the implementation and interface for a stack data structure that stores pointers to `Node` elements. The stack is implemented using a dynamic array and supports basic stack operations such as push, pop, peek, and checking if the stack is empty.
+        \begin{itemize}
+            \item stack.h
+            \inputminted{c}{../code/ast/stack.h}
+            \item stack.c
+            \inputminted{c}{../code/ast/stack.c}
+        \end{itemize}
+
+        \item \textbf{ast.c/ast.h}
+        
+        This module provides the implementation and interface for an Abstract Syntax Tree (AST) used to represent mathematical expressions. It includes definitions for node types, node structures, and functions to create, manipulate, and convert ASTs.
+        \begin{itemize}
+            \item ast.h
+            \inputminted{c}{../code/ast/ast.h}
+            \item ast.c
+            \inputminted{c}{../code/ast/ast.c}
+        \end{itemize}
+
+        \item \textbf{astmath.c/astmath.h}
+        
+        This module provides mathematical operations that can be performed on the AST, such as differentiation, finding variables, and checking structural equality of nodes.
+        \begin{itemize}
+            \item astmath.h
+            \inputminted{c}{../code/ast/astmath.h}
+            \item astmath.c
+            \inputminted{c}{../code/ast/astmath.c}
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Folder: simplificator}
+    
+    This folder includes two modules: one\_layer and monomial.
+    \begin{itemize}
+        \item \textbf{one\_layer.c/one\_layer.h}
+        
+        This module provides the implementation and interface for one-layer simplification of an AST. It simplifies mathematical expressions by applying basic algebraic rules.
+        \begin{itemize}
+            \item one\_layer.h
+            \inputminted{c}{../code/simplificator/one_layer.h}
+            \item one\_layer.c
+            \inputminted{c}{../code/simplificator/one_layer.c}
+        \end{itemize}
+
+        \item \textbf{monomial.c/monomial.h}
+        
+        This module provides the implementation and interface for handling monomials in the simplification process of mathematical expressions. It includes functions to create, manipulate, and convert monomials to and from AST nodes.
+        \begin{itemize}
+            \item monomial.h
+            \inputminted{c}{../code/simplificator/monomial.h}
+            \item monomial.c
+            \inputminted{c}{../code/simplificator/monomial.c}
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Misc and executables}
+    \begin{itemize}
+        \item \textbf{CMakeLists.txt}
+
+        CMakeLists.txt is the core configuration file for the CMake build system, defining project structure, compilation options, dependencies, and cross-platform build rules to generate native build environments (e.g., Makefiles or Visual Studio projects).
+        \inputminted{cmake}{../code/CMakeLists.txt}
+
+        \item \textbf{utils.c/utils.h}
+        
+        This module provides utility functions that are used across various parts of the project. These functions include string manipulation, mathematical computations, and expression modifications.
+        \begin{itemize}
+            \item utils.h
+            \inputminted{c}{../code/utils.h}
+            \item utils.c
+            \inputminted{c}{../code/utils.c}
+        \end{itemize}
+
+        \item \textbf{simplificator.c}
+        
+        This module provides the main entry point for the simplification program. It reads a mathematical expression from the command line, processes it through various simplification steps, and outputs the simplified expression.
+        \inputminted{c}{../code/simplificator.c}
+
+        \item \textbf{differentiate.c}
+        
+        This module provides the main entry point for the differentiation program. It reads a mathematical expression and a variable from the command line, processes the expression to compute its derivative with respect to the given variable, and outputs the result.
+        \inputminted{c}{../code/differentiate.c}
+
+        \item \textbf{differentiate\_simplified.c}
+        
+        This module provides a simplified entry point for the differentiation program. It reads a mathematical expression and optionally a variable from the command line, processes the expression to compute its derivative with respect to the given variable, simplifies the derivative, and outputs the result.
+        \inputminted{c}{../code/differentiate_simplified.c}
+    \end{itemize}
 \end{itemize}
 
 

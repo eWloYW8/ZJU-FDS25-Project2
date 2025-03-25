@@ -8,9 +8,7 @@
 
 # Usage
 
-You can build this project with CMake.
-
-To be finished...
+You can read code/README.md
 
 # Note
 
