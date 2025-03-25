@@ -163,6 +163,13 @@ Node* build_ast(const char *expression, int *current_position) {
                 node->data.function.left = build_ast(expression, current_position); // Parse the first argument.
                 node->data.function.right = build_ast(expression, current_position); // Parse the second argument.
                 push(operands, node); // Push the log node onto the operands stack.
+            } else if (strcmp(str, "pow") == 0) {
+                // If the string is "pow", create a pow function node.
+                Node* node = create_node(FUNCTION_POWER, NULL, 0, 0);
+                (*current_position)++;
+                node->data.function.left = build_ast(expression, current_position); // Parse the first argument.
+                node->data.function.right = build_ast(expression, current_position); // Parse the second argument.
+                push(operands, node); // Push the pow node onto the operands stack.
             } else if (strcmp(str, "exp") == 0) {
                 // If the string is "exp", create an exponential function node.
                 Node* node = create_node(FUNCTION_EXP, NULL, 0, 0);
