@@ -1,5 +1,5 @@
 #include "one_layer.h"
-#include "monomial.h"
+#include "astmath.h"
 
 #include <stdlib.h>
 
@@ -33,6 +33,17 @@ Node* simple_simplify(Node *node) {
                 free(node);
                 return temp;
             }
+            else if (node->data.function.right->type == FUNCTION_SUBTRACT && (node->data.function.right->data.function.left == NULL || node->data.function.right->data.function.left->type == NODE_CONSTANT && node->data.function.right->data.function.left->data.constant == 0)) {
+                // If right child is subtraction with 0 as left child, change the function to subtraction
+                Node *temp = create_node(FUNCTION_SUBTRACT, NULL, 0, 0);
+                temp->data.function.left = node->data.function.left;
+                temp->data.function.right = node->data.function.right->data.function.right;
+                free(node->data.function.right->data.function.left);
+                free(node->data.function.right);
+                if (temp->data.function.right == NULL) temp->data.function.right = create_node(NODE_CONSTANT, "0", 0, 1);
+                if (temp->data.function.left == NULL) temp->data.function.left = create_node(NODE_CONSTANT, "0", 0, 1);
+                return temp;
+            }
             else {
                 return node; // Return node if no simplification is possible
             }
@@ -52,6 +63,22 @@ Node* simple_simplify(Node *node) {
                 free(node->data.function.left);
                 node->data.function.left = NULL;
                 return node;
+            }
+            else if (is_equal(node->data.function.left, node->data.function.right)) {
+                // If left and right children are equal, return 0
+                free_node(node);
+                return create_node(NODE_CONSTANT, "0", 0, 1);
+            }
+            else if (node->data.function.right->type == FUNCTION_SUBTRACT && (node->data.function.right->data.function.left == NULL || node->data.function.right->data.function.left->type == NODE_CONSTANT && node->data.function.right->data.function.left->data.constant == 0)) {
+                // If right child is subtraction with 0 as left child, change the function to addition
+                Node *temp = create_node(FUNCTION_ADD, NULL, 0, 0);
+                temp->data.function.left = node->data.function.left;
+                temp->data.function.right = node->data.function.right->data.function.right;
+                free(node->data.function.right->data.function.left);
+                free(node->data.function.right);
+                if (temp->data.function.right == NULL) temp->data.function.right = create_node(NODE_CONSTANT, "0", 0, 1);
+                if (temp->data.function.left == NULL) temp->data.function.left = create_node(NODE_CONSTANT, "0", 0, 1);
+                return temp;
             }
             else {
                 return node; // Return node if no simplification is possible

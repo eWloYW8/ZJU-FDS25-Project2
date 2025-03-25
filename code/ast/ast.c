@@ -387,8 +387,6 @@ char* _node_to_string(Node *node, int parent_priority){
                     sprintf(str, "ERROR"); // Handle unknown node types.
             }
         }
-        free(left); // Free the memory allocated for the left child string.
-        free(right); // Free the memory allocated for the right child string.
     }
     return str; // Return the string representation of the node.
 }

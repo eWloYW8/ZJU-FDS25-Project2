@@ -19,4 +19,5 @@
 // 9. 0/node = 0
 // 10. node/1 = node
 // 11. 0-node = -node
+// 12. node-node = 0
 Node* simple_simplify(Node *node);
