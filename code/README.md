@@ -48,7 +48,7 @@ This module provides the implementation and interface for handling monomials in 
 
 This module provides utility functions that are used across various parts of the project. These functions include string manipulation, mathematical computations, and expression modifications.
 
-### simplificator.c/simplifictor(.exe)
+### simplificator.c/simplifictor(.exe) <span id="executable-info"></span>
 
 This module provides the main entry point for the simplification program. It reads a mathematical expression from the command line, processes it through various simplification steps, and outputs the simplified expression.
 
@@ -193,6 +193,8 @@ from the build directory. CMake will automatically detect changes and recompile 
 
 Binary releases for **Windows-amd64** and **Linux-amd64** are provided.
 
+The function of the three files are mentioned in the first section, [see above](#executable-info).
+
 Remind that you shouldn't directly double-click the executable files, but run them in terminal with arguments quoted by "". 
 
 You can rename the downloaded file by yourself.
@@ -201,23 +203,26 @@ You can rename the downloaded file by yourself.
 
 **Compiler**: gcc version 14.2.0 (Rev2, Built by MSYS2 project)  
 **Binaries**:
-  - simplificator.exe :  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1228301267smL6ypHN.exe
-  - differentiate.exe :  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1229168843J88qvybK.exe
-  - differentiate_simplified.exe :  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1229347921kPQ9qLoz.exe
+  - simplificator.exe：  
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/194735821579BopmsS.exe
+  - differentiate.exe：  
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/1946518359xmXdGs08.exe
+  - differentiate_simplified.exe：  
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/1947186110vu1XsdYF.exe
+
+    
 
 ## Linux
 
 **Compiler**: gcc version 12.2.0 (Debian 12.2.0-14)  
 **Binaries**:
-  - simplificator :  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator
-  - differentiate :  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate
-  - differentiate_simplified :  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified
+  - simplificator：  
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_linux
+  - differentiate：  
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_linux
+  - differentiate_simplified：  
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_linux
+    
 
 ---
 ---
@@ -268,7 +273,7 @@ You can rename the downloaded file by yourself.
 
 该模块提供项目各部分的通用工具函数，包括字符串操作、数学计算和表达式修改等功能。
 
-### simplificator.c/simplificator(.exe)
+### simplificator.c/simplificator(.exe) <span id="executable-info-chinese"></span>
 
 该模块是表达式简化程序的主入口。从命令行读取数学表达式，经过多步简化处理后输出简化结果。
 
@@ -291,7 +296,7 @@ You can rename the downloaded file by yourself.
 
 # 构建与运行指南
 
-> 若感到困惑，可直接跳至[二进制发布版](#release)
+> 若感到困惑，可直接跳至[二进制发布版](#release-chinese)
 
 本项目使用跨平台构建系统CMake组织。以下是在本地机器上构建和运行的步骤。
 
@@ -397,9 +402,11 @@ mingw32-make clean
   cmake -DCMAKE_BUILD_TYPE=Release ..
   ```
 
-# <span id="release">二进制发布版</span>
+# <span id="release-chinese">二进制发布版</span>
 
 提供**Windows-amd64**和**Linux-amd64**的预编译版本。
+
+三个文件的功能已在第一部分提到，[跳转](#executable-info-chinese)
 
 请注意，不应直接双击可执行文件，而需在终端中使用引号包裹参数运行。
 
@@ -410,19 +417,19 @@ mingw32-make clean
 **编译器**：gcc 14.2.0 gcc version 14.2.0 (Rev2, Built by MSYS2 project)  
 **下载链接**：
   - simplificator.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1228301267smL6ypHN.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/194735821579BopmsS.exe
   - differentiate.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1229168843J88qvybK.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/1946518359xmXdGs08.exe
   - differentiate_simplified.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/24/1229347921kPQ9qLoz.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/1947186110vu1XsdYF.exe
 
 ## Linux
 
 **编译器**：gcc 12.2.0 (Debian 12.2.0-14)  
 **下载链接**：
   - simplificator：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_linux
   - differentiate：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_linux
   - differentiate_simplified：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_linux

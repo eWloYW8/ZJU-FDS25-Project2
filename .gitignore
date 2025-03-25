@@ -5,3 +5,4 @@ build
 *.synctex.gz
 *.pdf
 _minted-*
+bin
