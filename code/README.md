@@ -63,14 +63,14 @@ This module provides the main entry point for the simplification program. It rea
 This module provides the main entry point for the differentiation program. It reads a mathematical expression and a variable from the command line, processes the expression to compute its derivative with respect to the given variable, and outputs the result.
 
 **Usage**:
-   - `differentiate <expression> [<variable>]`: Computes the derivative of the given mathematical expression with respect to the specified variable. If no variable is specified, it computes the derivative with respect to all variables found in the expression.
+   - `differentiate <expression> [<variable>](optional)`: Computes the derivative of the given mathematical expression with respect to the specified variable. If no variable is specified, it computes the derivative with respect to all variables found in the expression.
 
 ### differentiate_simplified.c/differentiate_simplified(.exe)
 
 This module provides a simplified entry point for the differentiation program. It reads a mathematical expression and optionally a variable from the command line, processes the expression to compute its derivative with respect to the given variable, simplifies the derivative, and outputs the result.
 
 **Usage**:
-   - `differentiate_simplified <expression> [<variable>]`: Computes the derivative of the given mathematical expression with respect to the specified variable. If no variable is specified, it computes the derivative with respect to all variables found in the expression and simplifies the result.
+   - `differentiate_simplified <expression> [<variable>](optional)`: Computes the derivative of the given mathematical expression with respect to the specified variable. If no variable is specified, it computes the derivative with respect to all variables found in the expression and simplifies the result.
 
 # How to Build and Run
 
@@ -145,12 +145,12 @@ After successfully building the project, you can run the generated executables f
 
 2. **Run the Differentiate**:
    ```bash
-   ./differentiate <expression> [<variable>]
+   ./differentiate <expression> [<variable>](optional)
    ```
 
 3. **Run the Differentiate Simplified**:
    ```bash
-   ./differentiate_simplified <expression> [<variable>]
+   ./differentiate_simplified <expression> [<variable>](optional)
    ```
 
 ## Cleaning the Build
@@ -299,14 +299,14 @@ CMakeLists.txt 是 CMake 构建系统的核心配置文件，用于定义项目�
 该模块是求导程序的主入口。从命令行读取数学表达式和变量，计算表达式对指定变量的导数并输出结果。
 
 **使用方法**：
-   - `differentiate <表达式> [<变量>]`：计算表达式对指定变量的导数。若未指定变量，则对表达式中所有变量求导。
+   - `differentiate <表达式> [<变量>]（可选）`：计算表达式对指定变量的导数。若未指定变量，则对表达式中所有变量求导。
 
 ### differentiate_simplified.c/differentiate_simplified(.exe)
 
 该模块是简化版求导程序的主入口。读取数学表达式和可选变量，计算导数后对结果进行简化并输出。
 
 **使用方法**：
-   - `differentiate_simplified <表达式> [<变量>]`：计算表达式对指定变量的导数并简化结果。若未指定变量，则对表达式中所有变量求导后简化。
+   - `differentiate_simplified <表达式> [<变量>]（可选）`：计算表达式对指定变量的导数并简化结果。若未指定变量，则对表达式中所有变量求导后简化。
 
 # 构建与运行指南
 
@@ -376,12 +376,12 @@ CMakeLists.txt 是 CMake 构建系统的核心配置文件，用于定义项目�
 
 2. **运行求导程序**：
    ```bash
-   ./differentiate "<表达式>" [<变量>]
+   ./differentiate "<表达式>" [<变量>]（可选）
    ```
 
 3. **运行简化版求导程序**：
    ```bash
-   ./differentiate_simplified "<表达式>" [<变量>]
+   ./differentiate_simplified "<表达式>" [<变量>]（可选）
    ```
 
 ## 清理构建
