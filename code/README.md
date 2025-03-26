@@ -208,11 +208,11 @@ You can rename the downloaded file by yourself.
 **Compiler**: gcc version 14.2.0 (Rev2, Built by MSYS2 project)  
 **Binaries**:
   - simplificator.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2204488835hFLIiZ3I.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/0913140940VZgcg5Pu.exe
   - differentiate.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2205093398F6eZVhg7.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/09133674858PAnbAIu.exe
   - differentiate_simplified.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2205207530c8uWLeec.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/091356517648h6Bhos.exe
 
     
 
@@ -221,12 +221,18 @@ You can rename the downloaded file by yourself.
 **Compiler**: gcc version 12.2.0 (Debian 12.2.0-14)  
 **Binaries**:
   - simplificator：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_linux_amd64
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_elf
   - differentiate：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_linux_amd64
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_elf
   - differentiate_simplified：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_linux_amd64
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_elf
     
+## Crash?
+
+If you find the program crashed, it means that you didn't use it correctly, or you don't know how to use a terminal.
+You can turn to this:
+https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/0917293192mW5QDCrn.exe
+
 
 ---
 ---
@@ -425,19 +431,24 @@ mingw32-make clean
 **编译器**：gcc 14.2.0 gcc version 14.2.0 (Rev2, Built by MSYS2 project)  
 **下载链接**：
   - simplificator.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2204488835hFLIiZ3I.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/0913140940VZgcg5Pu.exe
   - differentiate.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2205093398F6eZVhg7.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/09133674858PAnbAIu.exe
   - differentiate_simplified.exe：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/25/2205207530c8uWLeec.exe
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/091356517648h6Bhos.exe
 
 ## Linux
 
 **编译器**：gcc 12.2.0 (Debian 12.2.0-14)  
 **下载链接**：
   - simplificator：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_linux_amd64
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/simplificator_elf
   - differentiate：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_linux_amd64
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_elf
   - differentiate_simplified：  
-    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_linux_amd64
+    https://zjucube.oss-cn-hangzhou.aliyuncs.com/differentiate_simplified_elf
+
+## 闪退？
+
+如果你发现程序闪退，说明你没有正确地使用它，或者你不知道如何使用终端，你可以使用这个：
+https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/0917293192mW5QDCrn.exe
