@@ -4,7 +4,7 @@
 
 #include "ast.h"
 
-#define MAX_VARIABLES 1000
+#define MAX_VARIABLES 10000
 
 typedef struct {
     long long coefficient; // Coefficient of the monomial

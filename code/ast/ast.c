@@ -112,8 +112,8 @@ Node* deep_copy_node(Node *node) {
 // expression: The input expression string.
 // current_position: A pointer to the current position in the expression string.
 Node* build_ast(const char *expression, int *current_position) {
-    Stack *operators = create_stack(100); // Stack to hold operators.
-    Stack *operands = create_stack(100); // Stack to hold operands.
+    Stack *operators = create_stack(); // Stack to hold operators.
+    Stack *operands = create_stack(); // Stack to hold operands.
     while (expression[*current_position] != '\0') {
         if (isdigit(expression[*current_position])) {
             // If the current character is a digit, parse the constant.
@@ -246,7 +246,7 @@ Node* build_ast(const char *expression, int *current_position) {
 // parent_priority: The priority of the parent node to determine if parentheses are needed.
 char* _node_to_string(Node *node, int parent_priority){
     if (node == NULL) return NULL; // If the node is NULL, return NULL.
-    char *str = (char*)malloc(100); // Allocate memory for the string.
+    char *str = (char*)malloc(100000); // Allocate memory for the string.
     if (node->type == NODE_CONSTANT) {
         // If the node is a constant, convert it to a string.
         if (node->data.constant < 0 && parent_priority > 1) {
@@ -387,6 +387,8 @@ char* _node_to_string(Node *node, int parent_priority){
                     sprintf(str, "ERROR"); // Handle unknown node types.
             }
         }
+        free(left); // Free the memory allocated for the left string.
+        free(right); // Free the memory allocated for the right string.
     }
     return str; // Return the string representation of the node.
 }

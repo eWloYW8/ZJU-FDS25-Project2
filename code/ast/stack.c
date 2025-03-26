@@ -1,50 +1,60 @@
-#include "stack.h"
-#include <stdlib.h>
+#include "stack.h" // Include the header file for stack definitions
+#include <stdlib.h> // Include standard library for memory allocation functions
 
-// Function to create a stack with a given capacity
-// Allocates memory for the stack structure and its data array
-Stack* create_stack(int capacity) {
+// Define a structure for a node in the stack
+typedef struct StackNode {
+    Node *data; // Pointer to the data stored in the stack node
+    struct StackNode *next; // Pointer to the next node in the stack
+} StackNode;
+
+// Define the structure for the stack itself
+struct Stack {
+    StackNode *top; // Pointer to the top node of the stack
+};
+
+// Function to create a new stack
+Stack* create_stack() {
     Stack *s = (Stack*)malloc(sizeof(Stack)); // Allocate memory for the stack
-    s->data = (Node**)malloc(sizeof(Node*) * capacity); // Allocate memory for the stack's data array
-    s->top = -1; // Initialize the top index to -1, indicating the stack is empty
-    s->capacity = capacity; // Set the stack's capacity
+    s->top = NULL; // Initialize the top pointer to NULL (empty stack)
     return s; // Return the created stack
 }
 
-// Function to free the memory allocated for the stack
+// Function to free the memory used by the stack
 void free_stack(Stack *s) {
-    free(s->data); // Free the memory allocated for the stack's data array
-    free(s); // Free the memory allocated for the stack structure
+    StackNode *current = s->top; // Start from the top of the stack
+    while (current != NULL) { // Traverse through all nodes
+        StackNode *temp = current; // Store the current node
+        current = current->next; // Move to the next node
+        free(temp); // Free the current node
+    }
+    free(s); // Free the stack structure itself
 }
 
-// Function to push a node onto the stack
-// Adds the node to the top of the stack if there is space
+// Function to push a new node onto the stack
 void push(Stack *s, Node *node) {
-    if (s->top < s->capacity - 1) { // Check if there is space in the stack
-        s->data[++s->top] = node; // Increment the top index and add the node to the stack
-    }
+    StackNode *new_node = (StackNode*)malloc(sizeof(StackNode)); // Allocate memory for a new stack node
+    new_node->data = node; // Set the data of the new node
+    new_node->next = s->top; // Link the new node to the current top
+    s->top = new_node; // Update the top pointer to the new node
 }
 
-// Function to pop a node from the stack
-// Removes and returns the node from the top of the stack if the stack is not empty
+// Function to pop the top node from the stack
 Node* pop(Stack *s) {
-    if (s->top >= 0) { // Check if the stack is not empty
-        return s->data[s->top--]; // Return the top node and decrement the top index
-    }
-    return NULL; // Return NULL if the stack is empty
+    if (s->top == NULL) return NULL; // If the stack is empty, return NULL
+    
+    StackNode *temp = s->top; // Store the current top node
+    Node *data = temp->data; // Retrieve the data from the top node
+    s->top = temp->next; // Update the top pointer to the next node
+    free(temp); // Free the memory of the popped node
+    return data; // Return the data of the popped node
 }
 
 // Function to peek at the top node of the stack without removing it
-// Returns the node at the top of the stack if the stack is not empty
 Node* peek(Stack *s) {
-    if (s->top >= 0) { // Check if the stack is not empty
-        return s->data[s->top]; // Return the top node
-    }
-    return NULL; // Return NULL if the stack is empty
+    return (s->top != NULL) ? s->top->data : NULL; // Return the data of the top node, or NULL if the stack is empty
 }
 
 // Function to check if the stack is empty
-// Returns 1 if the stack is empty, 0 otherwise
 int is_empty(Stack *s) {
-    return s->top == -1; // Return 1 if the top index is -1, indicating the stack is empty
+    return s->top == NULL; // Return 1 (true) if the top pointer is NULL, otherwise 0 (false)
 }

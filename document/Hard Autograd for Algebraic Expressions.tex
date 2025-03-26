@@ -155,8 +155,8 @@ I adapt the Shunting Yard Algorithm to directly construct an expression tree (AS
 
 \textbf{Data Structures}:
 \begin{itemize}
-    \item \textit{operator\_stack}: Dynamic array for holding operators/functions
-    \item \textit{operand\_stack}: Dynamic array for subtrees (AST nodes)
+    \item \textit{operator\_stack}: Linked list for holding operators/functions
+    \item \textit{operand\_stack}: Linked list for subtrees (AST nodes)
     \item AST Node structure:
     \begin{minted}{c}
 typedef struct Node {
@@ -788,13 +788,10 @@ The code is shown in code/differentiate\_simplified.c.
         
         The algorithm recursively traverses all \(n\) nodes of the expression tree exactly once. Each node applies differentiation rules (product rule, chain rule, etc.) in constant time, regardless of subtree generation complexity. While derivative expressions may theoretically grow exponentially (e.g., \(n\)-layer nested multiplications), practical implementations avoid redundant computations through shared subtree references, preserving linear scaling.
 
-        \item \textbf{Space Complexity}: \(O(n\))
+        \item \textbf{Space Complexity}: \(O(n^2\))
         
-        Dominated by two components:
-        \begin{itemize}
-            \item Recursion stack depth (\(O(n)\) for skewed trees, \(O(\log n)\) for balanced trees)
-            \item Derivative tree storage (\(O(n)\) nodes due to expression tree structure reuse, with new nodes only created for operator expansions).
-        \end{itemize}
+        Take multiplication as an example. The space complexity of the algorithm is \(O(n^2)\) because the derivative of a product of two functions is the sum of the product of the derivative of the first function and the second function and the product of the first function and the derivative of the second function. Assume that the function is a multiplication of \(n\) terms, $$ f(x) = u_1(x) \cdot u_2(x) \cdots u_n(x) = \prod_{i=1}^n u_i(x). $$
+        then the derivative of the function is $$ f'(x) = \sum_{i=1}^n \left( u_i'(x) \cdot \prod_{\substack{j=1 \\ j \neq i}}^n u_j(x) \right). $$ It requires \(O(n^2)\) space to store the intermediate results.
     \end{itemize}
 
     \item \textbf{One-layer Simplification}

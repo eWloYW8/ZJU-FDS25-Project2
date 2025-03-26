@@ -128,7 +128,7 @@ Node *monomial_to_node(Monomial *monomial) {
         Node *current = create_node(FUNCTION_DIVIDE, NULL, 0, 0); // Create a divide node
         current->data.function.left = create_node_with_constant(monomial->coefficient); // Set left to coefficient
         current->data.function.right = create_node_with_constant(monomial->coefficient_denominator); // Set right to denominator
-        return current; // Return the constructed node
+        
     }
     Node *current = create_node(FUNCTION_DIVIDE, NULL, 0, 0); // Create a divide node
     current->data.function.left = create_node_with_constant(monomial->coefficient); // Set left to coefficient
