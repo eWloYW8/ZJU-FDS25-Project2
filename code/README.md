@@ -52,7 +52,7 @@ CMakeLists.txt is the core configuration file for the CMake build system, defini
 
 This module provides utility functions that are used across various parts of the project. These functions include string manipulation, mathematical computations, and expression modifications.
 
-### simplificator.c/simplifictor(.exe) <span id="executable-info"></span>
+### simplificator.c/simplificator(.exe) <span id="executable-info"></span>
 
 This module provides the main entry point for the simplification program. It reads a mathematical expression from the command line, processes it through various simplification steps, and outputs the simplified expression.
 
