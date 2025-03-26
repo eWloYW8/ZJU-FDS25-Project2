@@ -453,9 +453,11 @@ The monomial simplification process converts complex expressions into a normaliz
 \end{algorithmic}
 \end{algorithm}
 
-\textbf{Key Data Structures}:
+\textbf{Data Structures}:
 \begin{itemize}
     \item Monomial representation:
+    
+    It is a structure that contains the coefficient, the coefficient denominator, an array of pointers to the variable nodes, an array of exponents, and the count of variables.
     \begin{minted}{c}
     typedef struct Monomial {
         long long coefficient;
@@ -488,6 +490,7 @@ The code is shown in code/differentiate\_simplified.c.
     \begin{itemize}
         \item Add explicit zero for negative signs (e.g., transform "-x" to "0-x")
         \item Remove all whitespace characters
+        \item Add implicit multiplication operators (e.g., transform "2x" to "2*x")
     \end{itemize}
     
     \State Construct Abstract Syntax Tree:
@@ -556,7 +559,57 @@ The code is shown in code/differentiate\_simplified.c.
         }
     \end{table}
 
-    \item \textbf{Testcase 2: Math functions}
+    \item \textbf{Testcase 2: Operator Associativity}
+    
+    The input expression contains some operators which have error-prone
+    associativity rules.
+    \begin{table}[H]
+        \centering
+        \resizebox{1\columnwidth}{!}{
+        \begin{tabular}{c|c|c|c} \hline 
+            Input & \makecell[c]{Output\\(No simplification)} & \makecell[c]{Output\\(Simplifiled)}&  \makecell[c]{Reference\\Results}\\ \hline 
+
+            $x/2/2$&
+            \makecell[l]{
+                $x: ((1*2-x*0)/2^2*2-x/2*0)/2^2$
+            }&
+            \makecell[l]{
+                $x: 1/4$
+            }&
+            \makecell[l]{
+                $x: 1/4$
+            }
+            \\ \hline 
+
+            \makecell[c]{$1-2*x-2*x$}&
+            \makecell[l]{
+                $x: 0-(0*x+2*1)-(0*x+2*1)$
+            }&
+            \makecell[l]{
+                $x: -4$
+            }&
+            \makecell[l]{
+                $x: -4$
+            }
+            \\ \hline 
+
+            \makecell[c]{$x\mathbin{\char`\^}3\mathbin{\char`\^}2$}&
+            \makecell[l]{
+                $x: x\mathbin{\char`\^}3\mathbin{\char`\^}2*(3\mathbin{\char`\^}2*(0*ln(3)+2*0/3)*ln(x)+3\mathbin{\char`\^}2*1/x)$
+            }&
+            \makecell[l]{
+                $x: 9*x^8$
+            }&
+            \makecell[l]{
+                $x: 9*x^8$
+            }
+            \\ \hline 
+        \end{tabular}
+        }
+    \end{table}
+    Note that the operator \quad \texttt{\^} is right-associative.
+
+    \item \textbf{Testcase 3: Math functions}
     
     The input expression contains mathematical functions such as logarithms and trigonometric functions.
     \begin{table}[H]
@@ -617,7 +670,7 @@ The code is shown in code/differentiate\_simplified.c.
     \end{table}
 
 
-    \item \textbf{Testcase 3: Variable Name Tokenization}
+    \item \textbf{Testcase 4: Variable Name Tokenization}
     
     The input expression contains variables with similar names to math functions, or variables that are substrings of other variables.
     \begin{table}[H]
@@ -661,7 +714,7 @@ The code is shown in code/differentiate\_simplified.c.
     \end{table}
 
 
-    \item \textbf{Testcase 4: Constant}
+    \item \textbf{Testcase 5: Constant}
     
     The input expression contains only constants, with no variables.
     \begin{table}[H]
@@ -771,6 +824,9 @@ The code is shown in code/differentiate\_simplified.c.
     \item \textbf{Differentiation}:
     
     Cache results of identical expressions to avoid redundant calculations.
+    \item \textbf{Input}:
+    
+    Add error handling for invalid expressions or unsupported functions/operators.
 \end{itemize}
 
 

@@ -1,5 +1,6 @@
 #include "one_layer.h"
 #include "astmath.h"
+#include "utils.h"
 
 #include <stdlib.h>
 
@@ -44,6 +45,15 @@ Node* simple_simplify(Node *node) {
                 if (temp->data.function.left == NULL) temp->data.function.left = create_node(NODE_CONSTANT, "0", 0, 1);
                 return temp;
             }
+            else if (node->data.function.left->type == NODE_CONSTANT && node->data.function.right->type == NODE_CONSTANT) {
+                // If both children are constants, add them
+                Node *temp = create_node(NODE_CONSTANT, NULL, 0, 0);
+                temp->data.constant = node->data.function.left->data.constant + node->data.function.right->data.constant;
+                free_node(node->data.function.left);
+                free_node(node->data.function.right);
+                free(node);
+                return temp;
+            }
             else {
                 return node; // Return node if no simplification is possible
             }
@@ -55,6 +65,22 @@ Node* simple_simplify(Node *node) {
                 Node *temp = node->data.function.left;
                 if (temp == NULL) temp = create_node(NODE_CONSTANT, "0", 0, 1);
                 free(node->data.function.right);
+                free(node);
+                return temp;
+            }
+            else if (node->data.function.left != NULL && node->data.function.left->type == NODE_CONSTANT && node->data.function.right->type == NODE_CONSTANT) {
+                // If both children are constants, subtract them
+                Node *temp = create_node(NODE_CONSTANT, NULL, 0, 0);
+                temp->data.constant = node->data.function.left->data.constant - node->data.function.right->data.constant;
+                free_node(node->data.function.left);
+                free_node(node->data.function.right);
+                free(node);
+                return temp;
+            }
+            else if (node->data.function.left == NULL && node->data.function.right->type == NODE_CONSTANT) {
+                // If left child is NULL and right child is constant, return negative of right child
+                Node *temp = create_node_with_constant(-node->data.function.right->data.constant);
+                free_node(node->data.function.right);
                 free(node);
                 return temp;
             }
@@ -105,6 +131,15 @@ Node* simple_simplify(Node *node) {
                 free(node);
                 return temp;
             }
+            else if (node->data.function.left->type == NODE_CONSTANT && node->data.function.right->type == NODE_CONSTANT) {
+                // If both children are constants, multiply them
+                Node *temp = create_node(NODE_CONSTANT, NULL, 0, 0);
+                temp->data.constant = node->data.function.left->data.constant * node->data.function.right->data.constant;
+                free_node(node->data.function.left);
+                free_node(node->data.function.right);
+                free(node);
+                return temp;
+            }
             else {
                 return node; // Return node if no simplification is possible
             }
@@ -148,6 +183,15 @@ Node* simple_simplify(Node *node) {
                 // If right child is 1, return left child
                 Node *temp = node->data.function.left;
                 free(node->data.function.right);
+                free(node);
+                return temp;
+            }
+            else if (node->data.function.left->type == NODE_CONSTANT && node->data.function.right->type == NODE_CONSTANT) {
+                // If both children are constants, calculate the power
+                Node *temp = create_node(NODE_CONSTANT, NULL, 0, 0);
+                temp->data.constant = fastpow(node->data.function.left->data.constant, node->data.function.right->data.constant);
+                free_node(node->data.function.left);
+                free_node(node->data.function.right);
                 free(node);
                 return temp;
             }
