@@ -12,7 +12,7 @@ You can read code/README.md
 
 # Note
 
-I was once impressed by the magical functial of CAS (such as Mathematica, giac and sympy), this project gives me a chance to gain a deeper understanding of the underlying algorithms.
+I was once impressed by the magical function of CAS (such as Mathematica, giac and sympy), this project gives me a chance to gain a deeper understanding of the underlying algorithms.
 
 # Problem
 

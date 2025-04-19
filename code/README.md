@@ -2,6 +2,8 @@
 ---
 # Project Code File Structure
 
+The project is written in pure C, obviously it does not use STL.
+
 ## Folder: ast
 This folder includes three modules: stack, ast, and astmath.
 
@@ -230,13 +232,15 @@ You can rename the downloaded file by yourself.
 ## Crash?
 
 If you find the program crashed, it means that you didn't use it correctly, or you don't know how to use a terminal.
-You can turn to this:
+You can turn to this:  
 https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/0917293192mW5QDCrn.exe
 
 
 ---
 ---
 # <span id="chinese">项目代码文件结构</span>
+
+程序完全用C语言写成，显然没有使用STL。
 
 ## 文件夹：ast
 该文件夹包含三个模块：stack（栈）、ast（抽象语法树）和astmath（AST数学运算）。
@@ -450,5 +454,5 @@ mingw32-make clean
 
 ## 闪退？
 
-如果你发现程序闪退，说明你没有正确地使用它，或者你不知道如何使用终端，你可以使用这个：
+如果你发现程序闪退，说明你没有正确地使用它，或者你不知道如何使用终端，你可以使用这个：  
 https://zjucube.oss-cn-hangzhou.aliyuncs.com/uploads/2025/03/26/0917293192mW5QDCrn.exe
