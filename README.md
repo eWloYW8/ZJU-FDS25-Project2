@@ -4,8 +4,6 @@
 
 本人姓名+学号+身份证号字符串（格式如"张三+3212345678+130921199202218173"）的 sha256 值为 2CB76FBEA3FC658546864B3C6E4D80FB6C8B776FB520C0630C422A8BA3241C5D
 
-此仓库将保持 private 状态，确保不违反诚信守则
-
 # Usage
 
 You can read code/README.md
